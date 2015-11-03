@@ -37,32 +37,36 @@ global_settings{ assumed_gamma 1.0 }
                             location  <0.0 , 3.0 ,-0.001>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
-camera{Camera_0}
+#declare Camera_4 = camera {/*ultra_wide_angle*/ angle 80        
+                            location  <0.0 , 0.0 , -2.0>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 0.0 , 0.0>}                            
+camera{Camera_4}
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
 // sky ---------------------------------------------------------------------
-plane{<0,1,0>,1 hollow  
+/*plane{<0,1,0>,1 hollow  
        texture{ pigment{ bozo turbulence 0.76
                          color_map { [0.5 rgb <0.20, 0.20, 1.0>]
                                      [0.6 rgb <1,1,1>]
                                      [1.0 rgb <0.5,0.5,0.5>]}
                        }
                 finish {ambient 1 diffuse 0} }      
-       scale 10000}
+       scale 10000}*/
 // fog ---------------------------------------------------------------------
-fog{fog_type   2
+/*fog{fog_type   2
     distance   50
     color      White
     fog_offset 0.1
     fog_alt    2.0
-    turbulence 0.8}
+    turbulence 0.8}*/
 // ground ------------------------------------------------------------------
-plane { <0,1,0>, 0 
+/*plane { <0,1,0>, 0 
         texture{ pigment{ color rgb<0.35,0.65,0.0>*0.9 }
 	         normal { bumps 0.75 scale 0.015 }
                  finish { phong 0.1 }
                } // end of texture
-      } // end of plane
+      } // end of plane*/
 //--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------
@@ -203,9 +207,12 @@ merge
             finish { phong 1 reflection { 0.4 metallic 0.5} }
             //finish { phong 1 }
         }
-        scale 1.5*y
+        scale <1,1.5,1>
     }
 }
+
+#declare max_y = 0.5;
+#declare min_y = 0.1;
 
 #declare lower_head =
 difference
@@ -218,7 +225,8 @@ difference
     cone
     {
         <0, 0, -1>, 1, <0, 0, 0.7>, 0
-        scale 0.75*y
+        // scale <1,0.75,1>
+        scale <.7, (max_y - min_y) * pow(sin(2*pi*clock),2) + min_y,1>
         texture
         {
             pigment{ color Black }
@@ -256,7 +264,7 @@ intersection
 merge {
 object { upper_head }
 object { lower_head }
-//rotate 45*y
-translate 1.5*y
+//rotate clock*360*y
+rotate -10*x
 }
  

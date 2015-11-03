@@ -21,7 +21,7 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 // camera ------------------------------------------------------------------
 #declare Camera_0 = camera {perspective angle 75               // front view
-                            location  <0.0 , 2.0 ,-3.0>
+                            location  <0.0 , 5.0 ,-3.0>
                             right     x*image_width/image_height
                             look_at   <0.0 , 2.0 , 0.0>}
 #declare Camera_1 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
@@ -61,9 +61,9 @@ plane{ <0,1,0>, 0
 //---------------------------------------------------------------------------
 
 // Android robot
-#declare Android_Tex = texture { //Polished_Chrome
-    pigment{ color rgb<0.4, 1.0, 0.2> } // rgb< 1, 0.0, 0.0>}
-    finish { phong 1 reflection {0.05 metallic 0.5}}
+#declare Android_Tex = texture { Polished_Chrome
+    // pigment{ color rgb<0.4, 1.0, 0.2> } // rgb< 1, 0.0, 0.0>}
+    // finish { phong 1 reflection {0.05 metallic 0.5}}
 } // end of texture
 
 #declare Arm =  union {
@@ -88,6 +88,16 @@ plane{ <0,1,0>, 0
 
                     }
 
+#declare Z = -2;
+#declare End_Z = 6;
+
+#while ( Z <= End_Z ) 
+
+#declare X = -5;
+#declare End_X = 5;
+
+#while ( X <= End_X ) 
+
 union {
 	// Rumpf
 	cylinder { 
@@ -103,7 +113,7 @@ union {
 		translate<0,0.08,0>
 	}
 	// Arms
-	union { Arm rotate<0,0,-120+20*sin(10*pi*clock)> translate<-1.3,1,0> }
+	union { Arm rotate<0,0,-150+20*sin(10*pi*clock)> translate<-1.3,1,0> }
 	union { Arm rotate<0,0,+5> translate<+1.3,1,0> }
 	// Legs
 	union { Leg translate<-0.4,0,0> }
@@ -114,8 +124,12 @@ union {
 
 	texture{Android_Tex}
 	scale<1,1,1>
-	translate<0,abs(sin(2*pi*clock)),0>
-    rotate<0,0,20 * sin(2*pi*clock)>
-	translate<0,1.30,2>
+	translate<0,abs(0.3*sin(2*pi*clock)),0>
+    rotate<0,0,5 * sin(2*pi*clock)>
+	translate<4*X,1.30,4*Z - 4*clock>
+	#declare X = X + 1;
 }
 
+#end
+	#declare Z = Z + 1;
+#end

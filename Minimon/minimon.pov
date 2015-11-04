@@ -73,74 +73,14 @@ light_source{<1500,2500,-2500> color White}
 
 
 
-
-
-
-
-
-
-// sample sphere 
-
-
-/**sphere { <0,1,0>, 1.00 
-         pigment { color Yellow } 
-         scale<1.5,1,1>
-       }
-**/
-
-
-/*#declare eye =
-merge
+#declare minimon_color =
+texture
 {
-    sphere
-    {
-        0, 1
-        pigment { color White }
-    }
-    sphere
-    {
-        <0, 0, -2> , 0.5
-        texture
-        {
-            pigment{ color rgb< 1, 1, 1>*0.00 } //  color Black
-            finish { phong 1 }
-        }
-        scale 0.4*z
-    }
-    
+    pigment{ color rgb< 1.0, 0.65, 0.0> }//rgb<1.0, 0.1, 0.20>*1 }
+    finish { phong 1 reflection { 0.4 metallic 0.5 } }
 }
 
 
-
-#declare head =
-union
-{
-    sphere
-    {
-        0, 1
-        pigment { color Pink }
-        scale 1.3*x
-    }
-    object
-    {
-        eye
-        scale <0.3 ,0.3, 0.2>
-        rotate 30*y
-        translate -1*z
-        rotate -30*y
-    }
-    object
-    {
-        eye
-        scale <0.2 ,0.2, 0.1>
-        rotate -30*y
-        translate -1*z
-        rotate 30*y
-    }
-    translate 1*y
-}
-
-head*/
 #declare eye =
 sphere
 {
@@ -148,8 +88,7 @@ sphere
     texture
     {
         pigment{ color Black }
-        finish { phong 1 }
-        finish { phong 1 reflection { 0.4 metallic 0.5} }
+        finish { phong 2 reflection { 0.2 metallic 0.2 } }
     }
 }
 
@@ -158,36 +97,68 @@ intersection
 {
     sphere { 0, 1 }
     box {
-    <-1, 0, -1>, <1, 1, 1> 
+        <-1, 0, -1>, <1, 1, 1> 
         texture
         {
             pigment{ color Black }
-            //finish { phong 1 }
-            finish { phong 1 reflection { 0.4 metallic 0.5} }
+            finish { phong 1 reflection { 0.4 metallic 0.2 } }
         }
     }
-    /*texture
+    texture { minimon_color }    
+}
+
+#declare antenna = 
+object
+{   
+    //Round_Cone2( point A, radius A, point B, radius B, merge on) 
+    Round_Cone2( <0,0,0>, 0.2, <0,0.6,0>, 0.1, 0 )
+    texture{ minimon_color }
+}
+
+#declare arm =
+object
+{
+    //Round_Cylinder(point A, point B, Radius, EdgeRadius, UseMerge)
+    //Round_Cylinder(<0,0,0>, <0,1.5,0>, 0.1, 0.20, 0)
+    Round_Cone2( <0,0,0>, 0.15, <0,0.4,0>, 0.1, 0 )  
+    texture{ minimon_color }
+} 
+
+#declare foot =
+intersection
+{   
+    box{ <-1, 0, -1>, <1, 1, 1> } 
+    object
     {
-        pigment{ color rgb< 1.0, 0.65, 0.0> } 
-        finish { phong 1 reflection 0.00 }
-    }*/
-    texture
-    {
-        pigment{ color rgb<1.0, 0.1, 0.20>*1 }
-        finish { phong 1 reflection { 0.4 metallic 0.5} }
+        //Spheroid(  CenterVector,   RadiusVector Rx,Ry,Rz )
+        Spheroid(<0,0,0>,<0.3, 0.3, 0.6> )
+        texture{ minimon_color }
     }
 }
+
 
 #declare upper_head =
 merge
 {
     object { half_head }
+/*    object
+    {
+        antenna
+        rotate 50*x //<50,0,-20>
+        translate <0.3,0.8,0>
+    }
+    object
+    {
+        antenna
+        rotate 50*x //<50,0,20>
+        translate <-0.3,0.8,0>
+    } */
     object
     {
         eye
         scale <0.1, 0.2, 0.1>
         translate -0.98*z
-        rotate <20, 20, 0>
+        rotate <15, 15, 0>
         
     }
     object
@@ -195,7 +166,7 @@ merge
         eye
         scale <0.1, 0.2, 0.1>
         translate -0.98*z
-        rotate <20, -20, 0>
+        rotate <15, -15, 0>
     }
     torus
     {
@@ -204,11 +175,13 @@ merge
         {
             pigment{ color White }
             //finish { phong 1 reflection 0.00 }
-            finish { phong 1 reflection { 0.4 metallic 0.5} }
+            finish { phong 1 reflection { 0.2 metallic 0.5} }
             //finish { phong 1 }
         }
         scale <1,1.5,1>
     }
+<<<<<<< HEAD:minimon.pov
+=======
 }
 
 #declare max_y = 0.5;
@@ -217,13 +190,21 @@ merge
 #declare lower_head =
 difference
 {
+>>>>>>> origin/master:Minimon/minimon.pov
     object
     {
-        half_head
-        rotate 180*z
+        arm
+        rotate <0,0,110>
+        translate <-0.8, 0, -0.4>
     }
-    cone
+    object
     {
+<<<<<<< HEAD:minimon.pov
+        arm
+        rotate <0,0,-110>
+        translate <0.8, 0, -0.4>
+    }           
+=======
         <0, 0, -1>, 1, <0, 0, 0.7>, 0
         // scale <1,0.75,1>
         scale <.7, (max_y - min_y) * pow(sin(2*pi*clock),2) + min_y,1>
@@ -234,37 +215,46 @@ difference
             //finish { phong 1 }
         }
     }
+>>>>>>> origin/master:Minimon/minimon.pov
+}
+
+#declare lower_head =
+merge {
+    difference
+    {
+        object
+        {
+            half_head
+            rotate 180*z
+        }
+        cone
+        {
+            <0, 0, -1>, 1, <0, 0, 0.7>, 0
+            scale 0.75*y
+            texture
+            {
+                pigment{ color Black }
+                finish { phong 1 reflection { 0.4 metallic 0.5} }
+                //finish { phong 1 }
+            }
+        }
+    }
+    object { foot
+            translate 1*x }
 }
 
 
 
-/*
-intersection
-{
-    box
-    {
-        <-1, 0, -1> , <1, 0, 1>
-        texture
-        {
-            pigment{ color rgb<1.00, 1.00, 1.00>}  
-            finish { phong 1 reflection{ 0.00 metallic 0.00 } } 
-        }
-    }
-    sphere
-    {
-        0, 1
-        texture
-        {
-            pigment{ color rgb<1.00, 0.55, 0.00>}
-            finish { phong 1.0 reflection 0.00}
-        }  
-    }  
-}*/
-
 merge {
 object { upper_head }
 object { lower_head }
+<<<<<<< HEAD:minimon.pov
+
+//rotate 45*y
+translate 1.5*y
+=======
 //rotate clock*360*y
 rotate -10*x
+>>>>>>> origin/master:Minimon/minimon.pov
 }
  

@@ -85,6 +85,7 @@ texture
 sphere
 {
     0, 1
+    scale <0.1, 0.2, 0.1>
     texture
     {
         pigment{ color Black }
@@ -136,7 +137,6 @@ intersection
     }
 }
 
-
 #declare upper_head =
 merge
 {
@@ -156,7 +156,6 @@ merge
     object
     {
         eye
-        scale <0.1, 0.2, 0.1>
         translate -0.98*z
         rotate <15, 15, 0>
         
@@ -164,33 +163,31 @@ merge
     object
     {
         eye
-        scale <0.1, 0.2, 0.1>
         translate -0.98*z
         rotate <15, -15, 0>
     }
-    torus
+    torus // Teeth
     {
         0.8, 0.1 
         texture
         {
             pigment{ color White }
             //finish { phong 1 reflection 0.00 }
-            finish { phong 1 reflection { 0.2 metallic 0.5} }
+            finish { phong 1 reflection { 0.1 } }
             //finish { phong 1 }
         }
         scale <1,1.5,1>
     }
-<<<<<<< HEAD:minimon.pov
-=======
 }
 
 #declare max_y = 0.5;
 #declare min_y = 0.1;
+#declare max_x = 0.6;
+#declare min_x = 0.3;
 
 #declare lower_head =
 difference
 {
->>>>>>> origin/master:Minimon/minimon.pov
     object
     {
         arm
@@ -199,23 +196,16 @@ difference
     }
     object
     {
-<<<<<<< HEAD:minimon.pov
-        arm
-        rotate <0,0,-110>
-        translate <0.8, 0, -0.4>
-    }           
-=======
         <0, 0, -1>, 1, <0, 0, 0.7>, 0
         // scale <1,0.75,1>
-        scale <.7, (max_y - min_y) * pow(sin(2*pi*clock),2) + min_y,1>
+        scale <(max_x - min_x) * pow(sin(2*pi*clock),2) + min_x, (max_y - min_y) * pow(sin(2*pi*clock),2) + min_y,1>
         texture
         {
-            pigment{ color Black }
-            finish { phong 1 reflection { 0.4 metallic 0.5} }
+            pigment{ color rgb<0.05,0.0,0.01> }
+            //finish { phong 1 reflection { 0.4 metallic 0.5} }
             //finish { phong 1 }
         }
     }
->>>>>>> origin/master:Minimon/minimon.pov
 }
 
 #declare lower_head =
@@ -248,13 +238,9 @@ merge {
 merge {
 object { upper_head }
 object { lower_head }
-<<<<<<< HEAD:minimon.pov
 
 //rotate 45*y
 translate 1.5*y
-=======
-//rotate clock*360*y
-rotate -10*x
->>>>>>> origin/master:Minimon/minimon.pov
+//rotate -10*x
 }
  

@@ -70,6 +70,27 @@ light_source{<1500,2500,-2500> color White}
 //--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------
-#declare Clock = clock;
-#declare RotClock = clock - 1;
+#declare Clock = 0.5;
+#declare RotClock = Clock - 1;
 Earth((RotClock * RotClock * RotClock) * (-90), 1 + (Clock * Clock * Clock * Clock * 200))
+
+polygon { 4,
+    <0,0,0>,
+    <0.907981220657277,0,0>,
+    <0.907981220657277,1,0>,
+    <0,1,0>
+    pigment
+	{
+	image_map
+	  { jpeg "txt/hamburg.jpg"
+	    map_type 0
+	    once
+	  }
+	}
+	translate z*2
+	rotate y*RotClock
+	translate -z*2
+	
+	scale 4
+	translate<-2,-2,0>
+}

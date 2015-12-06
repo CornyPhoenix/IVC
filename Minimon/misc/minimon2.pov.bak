@@ -158,6 +158,7 @@ object
         box { <-1, -1, -1>, <0, 1, 1> }
     }
     texture{ skin }
+    translate y * (-0.3)          
 } 
 
 #declare foot =
@@ -218,7 +219,7 @@ merge {
         cone
         {
             <0, 0, -1>, 1, <0, 0, 0.7>, 0
-            //<scale 0.75*y
+            scale <0.9, 0.8, 0>
             texture { flesh }
 
         }
@@ -235,14 +236,14 @@ merge
     {
         arm // front view, left arm
         translate <-1, -0.4, 0>
-        rotate -25*y
+        rotate 180*x
     }
     object
     {
         arm // front view, right arm
-        rotate <0, 180, 0>
+        //rotate <, 180, 0>
         translate <1, -0.4, 0>
-        rotate 25*y
+        rotate 180*x
     }
     object
     {

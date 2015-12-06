@@ -1,4 +1,3 @@
-
 // PoVRay 3.7 Scene File " ... .pov"
 //--------------------------------------------------------------------------
 #version 3.7;
@@ -76,11 +75,18 @@ fog { fog_type   2
 //--------------------------------------------------------------------------
 // TEXTURES ----------------------------------------------------------------
 #declare skin =
-texture
+/*texture // Yellow
 {
     pigment{ color rgb< 1.0, 0.65, 0.0> }
     finish { phong 1 reflection { 0.4 metallic 0.5 } }
+} */ 
+texture
+{
+    pigment{ color rgb< 0.0, 0.5, 1.0> } //  Greenish Blue 
+    // normal { bumps 0.5 scale 0.05 }
+    finish { phong 2 }
 }
+
 
 #declare flesh =
 texture
@@ -98,11 +104,17 @@ sphere
 {
     0, 1
     scale <0.1, 0.2, 0.1>
-    texture
+    /*texture
     {
         pigment{ color Black }
         finish { phong 1  reflection { 0.2 metallic 0.2 } }
-    }
+    }*/
+    texture
+    {
+        pigment{ color rgb< 1, 1, 1>*0.00 } //  color Black
+        // normal { bumps 0.5 scale 0.05 }
+        finish { phong 2 }
+    }    
 }
 
 #declare half_head = 
@@ -145,6 +157,7 @@ object
         box { <-1, -1, -1>, <0, 1, 1> }
     }
     texture{ skin }
+    translate y * (-0.3)          
 } 
 
 #declare foot =
@@ -162,18 +175,6 @@ intersection
 merge
 {
     object { half_head }
-    /*object
-    {
-        antenna
-        rotate 50*x //<50,0,-20>
-        translate <0.3,0.8,0>
-    }
-    object
-    {
-        antenna
-        rotate 50*x //<50,0,20>
-        translate <-0.3,0.8,0>
-    }*/
     object
     {
         eye
@@ -205,7 +206,7 @@ merge {
         cone
         {
             <0, 0, -1>, 1, <0, 0, 0.7>, 0
-            //<scale 0.75*y
+            scale <0.9, 0.8, 0>
             texture { flesh }
 
         }
@@ -222,14 +223,14 @@ merge
     {
         arm // front view, left arm
         translate <-1, -0.4, 0>
-        rotate -25*y
+        rotate 180*x
     }
     object
     {
         arm // front view, right arm
-        rotate <0, 180, 0>
+        //rotate <, 180, 0>
         translate <1, -0.4, 0>
-        rotate 25*y
+        rotate 180*x
     }
     object
     {

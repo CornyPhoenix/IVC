@@ -1,0 +1,6 @@
+img/cloudy_earth.jpg -> https://upload.wikimedia.org/wikipedia/commons/6/6b/Land_ocean_ice_cloud_hires.jpg
+img/stars.png -> http://paulbourke.net/miscellaneous/starfield/8192x4096.png
+img/sky.jpg -> http://www.f-lohmueller.de/pov_tut/backgrnd/p_sky8.htm
+img/sky2.jpg -> http://www.sharecg.com/images/original/3949.jpg
+img/sky3.jpg -> http://www.foro3d.com/attachments/191748d1396261083-background-360-grados-en-cycles-skymap_senegal2_gen2.jpg
+img/sky4.jpg -> http://www.bzfusion.net/skymaps/skymap_photo9.jpg

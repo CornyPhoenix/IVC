@@ -77,7 +77,7 @@ box {
 	texture{ pigment{ color rgb<.24,0.45,0.23>*0.67 }
 	         normal { bumps 0.75 scale .000017647 }
                }
-	texture {
+	/*texture {
 		pigment { 
 			image_map { 
 				png "texture.png"
@@ -85,7 +85,7 @@ box {
 				interpolate 2 			
 		  }		  
 		}
-	}
+	}*/
 	scale <862, 850, 1>
 	rotate -90*x
 	rotate 180*y

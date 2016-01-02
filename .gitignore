@@ -4,6 +4,12 @@
 *.wlmp
 *.avi
 *.bak
+*.aux
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+doc.pdf
 IVChandouts.pdf
 IVCslidesInc.pdf
 Landscape/Informatikum/texture.png

@@ -18,29 +18,31 @@ global_settings{ assumed_gamma 1.0 }
 #include "functions.inc"
 #include "math.inc"
 #include "transforms.inc"
+
+#declare Window_Glass =  //--------------------------------------------- no IOR window glass texture
+      texture { pigment{ rgbf <0.98, 0.98, 0.98, 0.9> }
+                finish { diffuse 0.1 reflection 0.2  
+                         specular 0.8 roughness 0.0003 phong 1 phong_size 400}
+               } // end of texture ------------------------------------------------------------------
+
+//
+// Alle Maﬂe sind gegeben in Dezimetern (10 dm = 1 m).
+//
+
+//--------------------------------------------------------------------------
+// positions ---------------------------------------------------------------
+#declare HausF_H = 150.0;
+#declare HausF_Pos = <630.576, HausF_H/2, -319.864>;
+
+#declare Camera_Pos = <550, 50.0,-500>;
+
 //--------------------------------------------------------------------------
 // camera ------------------------------------------------------------------
-#declare Camera_0 = camera {/*ultra_wide_angle*/ angle 100      // front view
-                            location  <447 , 50.0 ,-800>
+#declare Camera = camera {/*ultra_wide_angle*/ angle 100      // front view
+                            location  Camera_Pos
                             right     x*image_width/image_height
-                            look_at   <447 , 0.0 , -443>}
-#declare Camera_1 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
-                            location  <2.0 , 2.5 ,-3.0>
-                            right     x*image_width/image_height
-                            look_at   <0.0 , 1.0 , 0.0>}
-#declare Camera_2 = camera {/*ultra_wide_angle*/ angle 90 // right side view
-                            location  <3.0 , 1.0 , 0.0>
-                            right     x*image_width/image_height
-                            look_at   <0.0 , 1.0 , 0.0>}
-#declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90        // top view
-                            location  <0.0 , 3.0 ,-0.001>
-                            right     x*image_width/image_height
-                            look_at   <0.0 , 1.0 , 0.0>}
-#declare Camera_4 = camera {/*ultra_wide_angle*/ angle 80        
-                            location  <0.0 , 0.0 , -2.0>
-                            right     x*image_width/image_height
-                            look_at   <0.0 , 0.0 , 0.0>}                            
-camera{Camera_0}
+                            look_at   HausF_Pos}                       
+camera{Camera}
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
 // sky ---------------------------------------------------------------------
@@ -74,10 +76,10 @@ plane { <0,-0.1,0>, 0
 box {
 	<0,0,0>
 	<1,1,0.1>
-	texture{ pigment{ color rgb<.24,0.45,0.23>*0.67 }
+	/*texture{ pigment{ color rgb<.24,0.45,0.23>*0.67 }
 	         normal { bumps 0.75 scale .000017647 }
-               }
-	/*texture {
+               }*/
+	texture {
 		pigment { 
 			image_map { 
 				png "texture.png"
@@ -85,7 +87,7 @@ box {
 				interpolate 2 			
 		  }		  
 		}
-	}*/
+	}
 	scale <862, 850, 1>
 	rotate -90*x
 	rotate 180*y
@@ -148,11 +150,43 @@ union {
 
 // :'-(
 
+#declare HausF_Ziegel = texture{
+                          pigment{ brick
+                                   color White  // Fugenfarbe
+                                   color rgb<0.8,0.25,0.1>// Ziegelfarbe
+                                   brick_size <1.6, 0.6, 0.125 >
+                                   // Ziegelformat in x-,y-,z-Richtung
+                                   mortar 0.02 // Fugendicke 
+                                 }
+                          normal { wrinkles 0.75 scale 0.01}
+                          finish { diffuse 0.9 phong 0.2}
+                        }// end of texture
+
 // Haus F
-box {
-	<596.331,00,-455.479>
-	<664.822,150,-184.249>
-	texture { pigment { color Magenta } }
+union {
+    merge {
+        box {
+        	<600,00,-450>
+        	<670,HausF_H,-180>
+        	texture { pigment { color White } }
+        	hollow on
+        }
+        box {
+        	<610,10,-450.1>
+        	<635,20,-180>
+        	texture { Window_Glass }
+        }
+    }
+    box {
+    	<598,00,-452>
+    	<610,HausF_H,-420>
+    	texture { HausF_Ziegel }
+    }
+    box {
+    	<635,00,-452>
+    	<670,HausF_H,-420>
+    	texture { HausF_Ziegel }
+    }
 }
 
 // Haus G

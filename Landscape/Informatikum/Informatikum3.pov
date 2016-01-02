@@ -5,6 +5,7 @@
 #version 3.7;
 global_settings{ assumed_gamma 1.0 }
 #default{ finish{ ambient 0.1 diffuse 0.9 }} 
+
 //--------------------------------------------------------------------------
 #include "colors.inc"
 #include "textures.inc"
@@ -20,14 +21,13 @@ global_settings{ assumed_gamma 1.0 }
 #include "transforms.inc"
 #include "Informatikum.inc"
 //--------------------------------------------------------------------------
+
 // camera ------------------------------------------------------------------
-#declare Camera_0 = camera {/*ultra_wide_angle*/ angle 100      // front view
-                            location  <2000, 500.0, -200>
-                            right     x*image_width/image_height
-                            look_at   <1300 , 0.0 , 500>}                  
-camera{Camera_0}
+camera{Camera_SO}
+
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
+
 // sky ---------------------------------------------------------------------
 plane{<0,1,0>,1 hollow  
        texture{ pigment{ bozo turbulence 0.76
@@ -37,6 +37,7 @@ plane{<0,1,0>,1 hollow
                        }
                 finish {ambient 1 diffuse 0} }      
        scale 10000}
+
 // fog ---------------------------------------------------------------------
 fog{fog_type   2
     distance   50
@@ -44,13 +45,15 @@ fog{fog_type   2
     fog_offset 0.1
     fog_alt    2.0
     turbulence 0.8}
+
 // ground ------------------------------------------------------------------
 plane { <0,-0.1,0>, 0 
         texture{ pigment{ color rgb<.24,0.35,0.23> }
 	         normal { bumps 0.75 scale 0.015 }
                  finish { phong 0.1 }
                } // end of texture
-      } // end of plane
+} // end of plane
+
 //--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------

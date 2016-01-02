@@ -5,6 +5,25 @@
 
 // Alle Maße in Dezimetern (10 dm = 1 m)
 
+#declare level_height = 35;                
+
+// Materialien -------------------------------------------------------------
+#declare Fenster = texture { pigment{ rgbf <0.98, 0.98, 0.98, 0.9> }
+                    finish { diffuse 0.1 reflection 0.2  
+                             specular 0.8 roughness 0.0003 phong 1 phong_size 400}
+                   } // end of texture
+#declare Ziegel = texture{
+                          pigment{ brick
+                                   color White  // Fugenfarbe
+                                   color rgb<0.8,0.25,0.1>// Ziegelfarbe
+                                   brick_size <2, 1, 2 >
+                                   // Ziegelformat in x-,y-,z-Richtung
+                                   mortar 0.08 // Fugendicke 
+                                 }
+                          normal { wrinkles 0.75 scale 0.01}
+                          finish { diffuse 0.9 phong 0.2}
+                  } // end of texture
+
 // Haus A1
 #declare A1_x      = 620;
 #declare A1_z      = 170;
@@ -64,13 +83,15 @@
 // Haus D1
 #declare D1_x      = 350;
 #declare D1_z      = 1040;
+#declare D1_m      = 740;
 #declare D1_width  = 780;
 #declare D1_depth  = 170;
 #declare D1_color  = <41, 171, 226> / 255;
 #declare D1_levels = 2;
+#declare D1_margin = 13;
 
 // Haus D2
-#declare D2_x      = 700;
+#declare D2_x      = 675;
 #declare D2_z      = 960;
 #declare D2_width  = 130;
 #declare D2_depth  = 130;
@@ -117,10 +138,30 @@
 #declare R_color   = <237, 30, 121> / 255;
 #declare R_levels  = 2;
 
+// Kameras
+#declare Camera_SO = camera {angle 100 
+                            location  <2000, 500.0, -200>
+                            right     x*image_width/image_height
+                            look_at   <1300 , 0.0 , 500>}   
+
+#declare Camera_HausF = camera {angle 100
+                            location  <F1_x-90, 100, F1_z-F1_depth-200>
+                            right     x*image_width/image_height
+                            look_at   <F1_x+90 , 100.0 , F1_z>}  
+#declare Camera_AusF = camera {angle 100
+                            location  <F1_x+60, 3*level_height+17, F1_z-F1_depth+10>
+                            right     x*image_width/image_height
+                            look_at   <F1_x+50 , 3*level_height+17, F1_z-F1_depth-10>}  
+
+#declare Camera_HausD = camera {angle 105
+                            location  <100+D1_x+D1_width/2, 100, D1_z-D1_depth-300>
+                            right     x*image_width/image_height
+                            look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}  
+
 #macro Haus(px, pz, pwidth, pdepth, plevels, pcolor)
 	box {
 		<px, 0, pz - pdepth>
-		<px + pwidth, 30 * plevels, pz>
+		<px + pwidth, level_height * plevels, pz>
 		texture { pigment { color rgb pcolor } }
 	}
 #end

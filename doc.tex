@@ -27,6 +27,12 @@
 
 \newcommand{\twodo}[1]{\textcolor{red}{\textbf{todo:} #1}}
 
+% Übersetzungen für Autoref-Label
+\newcommand{\subfigureautorefname}{Abb.}
+\renewcommand{\figureautorefname}{Abbildung}
+\renewcommand{\sectionautorefname}{Abschnitt}
+\renewcommand{\subsectionautorefname}{Unterabschnitt}
+
 \begin{document}
 	\renewcommand{\refname}{Referenzen}
 	\maketitle	
@@ -37,6 +43,7 @@
 	
 	\subsection{Figuren}
 	
+	\include*{Landscape/Informatikum/Informatikum}
 	\include*{Documentation/Werkzeuge}
 	\include*{Documentation/Zusammenfassung}
 	

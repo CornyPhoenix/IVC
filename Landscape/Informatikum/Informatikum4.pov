@@ -23,7 +23,7 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 
 // camera ------------------------------------------------------------------
-camera{Camera_HausD}
+camera{Camera_HausB}
 
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
@@ -74,6 +74,49 @@ box {
 	rotate -90*x
 	rotate 180*y
 	translate <1800, 0, 0>
+}
+
+// Haus B
+
+#declare Pigment_1 =
+pigment{ gradient <0,1,0> 
+         color_map{
+            [ 0.0 color rgb<.9,.9,.9> ]
+            [ 0.5 color rgb<1,0,0> ]
+            [ 1.0 color rgb<.9,.9,.9> ]
+         } // end color_map
+         scale 5
+} // end pigment
+
+#local B1_tex = texture{
+          pigment{ color rgb<.7,.7,.7>}
+          normal {pigment_pattern{Pigment_1},0.5}
+          finish { phong 0.5  }
+        } // end of texture
+box {
+	<B1_x,          0,                      B1_z-B1_depth>
+	<B1_x+B1_width, B1_levels*level_height, B1_z>
+	texture { B1_tex }
+}
+
+// Haus C
+box {
+	<C3_x,          0,                      C3_z-C3_depth>
+	<C3_x+C3_width, C3_levels*level_height, C3_z>
+	texture { Fenster }
+	hollow on
+}
+box {
+	<C1_x,          0,                      C1_z-C1_depth>
+	<C1_x+C1_width, C1_levels*level_height, C1_z>
+	texture { Ziegel }
+	hollow on
+}
+box {
+	<C2_x,          0,                      C2_z-C2_depth>
+	<C2_x+C2_width, C2_levels*level_height, C2_z>
+	texture { Ziegel }
+	hollow on
 }
 
 // Haus D
@@ -317,11 +360,7 @@ union {
 
 Haus(A1_x, A1_z, A1_width, A1_depth, A1_levels, A1_color)
 Haus(A2_x, A2_z, A2_width, A2_depth, A2_levels, A2_color)
-Haus(B1_x, B1_z, B1_width, B1_depth, B1_levels, B1_color)
 Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
-Haus(C1_x, C1_z, C1_width, C1_depth, C1_levels, C1_color)
-Haus(C2_x, C2_z, C2_width, C2_depth, C2_levels, C2_color)
-Haus(C3_x, C3_z, C3_width, C3_depth, C3_levels, C3_color)
 Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
 Haus(G_x,  G_z,  G_width,  G_depth,  G_levels,  G_color)
 Haus(H_x,  H_z,  H_width,  H_depth,  H_levels,  H_color)

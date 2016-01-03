@@ -153,6 +153,11 @@
                             right     x*image_width/image_height
                             look_at   <F1_x+50 , 3*level_height+17, F1_z-F1_depth-10>}  
 
+#declare Camera_HausB = camera {angle 105
+                            location  <B1_x+B1_width/2 - 100, 100, B1_z+200>
+                            right     x*image_width/image_height
+                            look_at   <B1_x+B1_width/2, 50, B1_z-B1_depth>}  
+
 #declare Camera_HausD = camera {angle 105
                             location  <100+D1_x+D1_width/2, 100, D1_z-D1_depth-300>
                             right     x*image_width/image_height

@@ -90,8 +90,9 @@ union {
         // Fenster ausschneiden
         #for (level, 0, 1)
         #for (window, 0, 7)
-            #local x1 = D1_m+window*window_width+65 +2;
-            #local x2 = D1_m+(window+1)*window_width+65 -2;
+        #for (rechts, 0, 1)
+            #local x1 = rechts*(D1_width/2+D2_width/2-D1_margin) + D1_margin+D1_x+window*window_width +2;
+            #local x2 = rechts*(D1_width/2+D2_width/2-D1_margin) + D1_margin+D1_x+(window+1)*window_width -2;
             #local y1 = level*level_height+25;
             #local y2 = (level+1)*level_height+12;
             #local z1 = D1_z-D1_depth-0.1;
@@ -101,11 +102,7 @@ union {
                 <x2,y2,z2>
                 texture { Fenster }
             }
-            box {
-                <D1_x+D1_margin+window*window_width +2,level*level_height+25,D1_z-D1_depth-0.1>
-                <D1_x+D1_margin+(window+1)*window_width -2,(level+1)*level_height+12,D1_z+0.1>
-                texture { Fenster }
-            }
+        #end
         #end
         #end
     }
@@ -143,6 +140,18 @@ union {
                     #local y1 = level*level_height+25;
                     #local y2 = (level+1)*level_height+12;
                     #local z1 = D1_z-D1_depth-0.1 + hinten*(D1_depth+0.2);
+                    // Graue Pfosten
+                    box {
+                        <x1-2,y1-10,z1-1>
+                        <x1-1,y2+3,z1>
+                        texture { pigment { color Gray60 } }
+                    }
+                    box {
+                        <x2+1,y1-10,z1-1>
+                        <x2+2,y2+3,z1>
+                        texture { pigment { color Gray60 } }
+                    }
+                    
                     // Vertikale Streben
                     box {
                         <x1,y1,z1-1>
@@ -184,6 +193,71 @@ union {
             #end 
         #end
     #end
+}
+
+// Haus D Eingang
+merge {
+	union {
+		box {
+		    <D2_x,0,D2_z-D2_depth>
+		    <D2_x+D2_width,D2_levels*level_height,D2_z>
+		    texture { pigment { color White } }
+		    hollow on
+		}
+		
+		// Graue Kanten Haus D Eingang
+		#local y2 = D2_levels*level_height;
+		union {
+			box {
+			    <D2_x+D2_width-6,0,D2_z-D2_depth-.1>
+			    <D2_x+D2_width+.1,y2,D2_z-D2_depth+6>
+			}
+			box {
+			    <D2_x+D2_width-53,0,D2_z-D2_depth-.1>
+			    <D2_x+D2_width-47,y2,D2_z-D2_depth+6>
+			}
+			box {
+			    <D2_x-.1,0,D2_z-D2_depth-.1>
+			    <D2_x+6,y2,D2_z-D2_depth+6>
+			}
+			box {
+			    <D2_x,y2-6,D2_z-D2_depth-.1>
+			    <D2_x+D2_width,y2,D2_z-D2_depth+6>
+			}
+			box {
+			    <D2_x,0,D2_z-D2_depth-.1>
+			    <D2_x+D2_width,6,D2_z-D2_depth+6>
+			}
+			texture { pigment { color Gray60 } }
+		}
+	}
+	
+	// Fenster ausschneiden
+	#for (level, 0, 2)
+		#local y2 = (level+1)*level_height-6;
+		#local y1 = y2 - level_height/3;
+		box {
+			<D2_x+6,y1,D2_z-D2_depth-.1>
+		  <D2_x+36,y2,D2_z+.1>
+		  texture { Fenster }
+		}
+		box {
+			<D2_x+D2_width-83,y1,D2_z-D2_depth-.1>
+		  <D2_x+D2_width-53,y2,D2_z+.1>
+		  texture { Fenster }
+		}
+	#end
+	
+	// Treppenhausfenster
+	#for (level, 0, 2)
+		#local y2 = level_height + (level+1)*(level_height*2/3)-6;
+		#local y1 = y2 - level_height/3;
+		box {
+			<D2_x+D2_width-47,y1,D2_z-D2_depth-.1>
+		  <D2_x+D2_width-6,y2,D2_z+.1>
+		  texture { Fenster }
+		}
+	#end
 }
 
 // Haus F
@@ -248,7 +322,6 @@ Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
 Haus(C1_x, C1_z, C1_width, C1_depth, C1_levels, C1_color)
 Haus(C2_x, C2_z, C2_width, C2_depth, C2_levels, C2_color)
 Haus(C3_x, C3_z, C3_width, C3_depth, C3_levels, C3_color)
-Haus(D2_x, D2_z, D2_width, D2_depth, D2_levels, D2_color)
 Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
 Haus(G_x,  G_z,  G_width,  G_depth,  G_levels,  G_color)
 Haus(H_x,  H_z,  H_width,  H_depth,  H_levels,  H_color)

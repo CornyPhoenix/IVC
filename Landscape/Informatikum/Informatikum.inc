@@ -1,9 +1,9 @@
 //--------------------------------------------------------------------------
-// author:  Sibel Toprak, Konstantin M√∂llers
+// author:  Sibel Toprak, Konstantin Möllers
 // date:    2016-01-01
 //--------------------------------------------------------------------------
 
-// Alle Ma√üe in Dezimetern (10 dm = 1 m)
+// Alle Maße in Dezimetern (10 dm = 1 m)
 
 #declare level_height = 35;                
 
@@ -161,7 +161,7 @@
 #declare Camera_HausD = camera {angle 105
                             location  <100+D1_x+D1_width/2, 100, D1_z-D1_depth-300>
                             right     x*image_width/image_height
-                            look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}  
+                            look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}                         
 
 #macro Haus(px, pz, pwidth, pdepth, plevels, pcolor)
 	box {

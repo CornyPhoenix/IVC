@@ -23,7 +23,7 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 
 // camera ------------------------------------------------------------------
-camera{Camera_HausB}
+camera{Camera_HausD}
 
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
@@ -124,29 +124,65 @@ union {
     #local window_width=39;
     
     merge {
-        box {
-        	<D1_x,15,D1_z-D1_depth>
-        	<D1_x+D1_width,D1_levels*level_height+15,D1_z>
-        	texture { pigment { color White } }
-        	hollow on
-        }
-        // Fenster ausschneiden
-        #for (level, 0, 1)
-        #for (window, 0, 7)
-        #for (rechts, 0, 1)
-            #local x1 = rechts*(D1_width/2+D2_width/2-D1_margin) + D1_margin+D1_x+window*window_width +2;
-            #local x2 = rechts*(D1_width/2+D2_width/2-D1_margin) + D1_margin+D1_x+(window+1)*window_width -2;
-            #local y1 = level*level_height+25;
-            #local y2 = (level+1)*level_height+12;
-            #local z1 = D1_z-D1_depth-0.1;
-            #local z2 = D1_z+0.1;
+        union {
+            // D1
             box {
-                <x1,y1,z1>
-                <x2,y2,z2>
+            	<D1_x,15,D1_z-D1_depth>
+            	<D1_x+D1_width,D1_levels*level_height+15,D1_z>
+            }
+            // D2
+            box {
+                <D2_x,0,D2_z-D2_depth>
+                <D2_x+D2_width,D2_levels*level_height,D2_z>
+            }
+            texture { pigment { color White } }
+            hollow on
+        }
+
+        // Fenster D1 ausschneiden
+        #for (level, 0, 1)
+            #for (window, 0, 7)
+                #for (rechts, 0, 1)
+                    #local x1 = rechts*(D1_width/2+D2_width/2-D1_margin) + D1_margin+D1_x+window*window_width +2;
+                    #local x2 = rechts*(D1_width/2+D2_width/2-D1_margin) + D1_margin+D1_x+(window+1)*window_width -2;
+                    #local y1 = level*level_height+25;
+                    #local y2 = (level+1)*level_height+12;
+                    #local z1 = D1_z-D1_depth-0.1;
+                    #local z2 = D1_z+0.1;
+                    box {
+                        <x1,y1,z1>
+                        <x2,y2,z2>
+                        texture { Fenster }
+                    }
+                #end
+            #end
+        #end
+
+        // Fenster D2 ausschneiden
+        #for (level, 0, 2)
+            #local y2 = (level+1)*level_height-6;
+            #local y1 = y2 - level_height/3;
+            box {
+                <D2_x+6,y1,D2_z-D2_depth-.1>
+                <D2_x+36,y2,D1_z+.1>
+                texture { Fenster }
+            }
+            box {
+                <D2_x+D2_width-83,y1,D2_z-D2_depth-.1>
+                <D2_x+D2_width-53,y2,D1_z+.1>
                 texture { Fenster }
             }
         #end
-        #end
+        
+        // Treppenhausfenster D2
+        #for (level, 0, 2)
+            #local y2 = level_height + (level+1)*(level_height*2/3)-6;
+            #local y1 = y2 - level_height/3;
+            box {
+                <D2_x+D2_width-47,y1,D2_z-D2_depth-.1>
+                <D2_x+D2_width-6,y2,D1_z+.1>
+                texture { Fenster }
+            }
         #end
     }
     box {
@@ -236,72 +272,33 @@ union {
             #end 
         #end
     #end
-}
 
-// Haus D Eingang
-merge {
-	union {
-		box {
-		    <D2_x,0,D2_z-D2_depth>
-		    <D2_x+D2_width,D2_levels*level_height,D2_z>
-		    texture { pigment { color White } }
-		    hollow on
-		}
-		
-		// Graue Kanten Haus D Eingang
-		#local y2 = D2_levels*level_height;
-		union {
-			box {
-			    <D2_x+D2_width-6,0,D2_z-D2_depth-.1>
-			    <D2_x+D2_width+.1,y2,D2_z-D2_depth+6>
-			}
-			box {
-			    <D2_x+D2_width-53,0,D2_z-D2_depth-.1>
-			    <D2_x+D2_width-47,y2,D2_z-D2_depth+6>
-			}
-			box {
-			    <D2_x-.1,0,D2_z-D2_depth-.1>
-			    <D2_x+6,y2,D2_z-D2_depth+6>
-			}
-			box {
-			    <D2_x,y2-6,D2_z-D2_depth-.1>
-			    <D2_x+D2_width,y2,D2_z-D2_depth+6>
-			}
-			box {
-			    <D2_x,0,D2_z-D2_depth-.1>
-			    <D2_x+D2_width,6,D2_z-D2_depth+6>
-			}
-			texture { pigment { color Gray60 } }
-		}
-	}
-	
-	// Fenster ausschneiden
-	#for (level, 0, 2)
-		#local y2 = (level+1)*level_height-6;
-		#local y1 = y2 - level_height/3;
-		box {
-			<D2_x+6,y1,D2_z-D2_depth-.1>
-		  <D2_x+36,y2,D2_z+.1>
-		  texture { Fenster }
-		}
-		box {
-			<D2_x+D2_width-83,y1,D2_z-D2_depth-.1>
-		  <D2_x+D2_width-53,y2,D2_z+.1>
-		  texture { Fenster }
-		}
-	#end
-	
-	// Treppenhausfenster
-	#for (level, 0, 2)
-		#local y2 = level_height + (level+1)*(level_height*2/3)-6;
-		#local y1 = y2 - level_height/3;
-		box {
-			<D2_x+D2_width-47,y1,D2_z-D2_depth-.1>
-		  <D2_x+D2_width-6,y2,D2_z+.1>
-		  texture { Fenster }
-		}
-	#end
-}
+    // Graue Kanten Haus D Eingang
+    #local y2 = D2_levels*level_height;
+    union {
+        box {
+            <D2_x+D2_width-6,0,D2_z-D2_depth-.1>
+            <D2_x+D2_width+.1,y2,D2_z-D2_depth+6>
+        }
+        box {
+            <D2_x+D2_width-53,0,D2_z-D2_depth-.1>
+            <D2_x+D2_width-47,y2,D2_z-D2_depth+6>
+        }
+        box {
+            <D2_x-.1,0,D2_z-D2_depth-.1>
+            <D2_x+6,y2,D2_z-D2_depth+6>
+        }
+        box {
+            <D2_x,y2-6,D2_z-D2_depth-.1>
+            <D2_x+D2_width,y2,D2_z-D2_depth+6>
+        }
+        box {
+            <D2_x,0,D2_z-D2_depth-.1>
+            <D2_x+D2_width,6,D2_z-D2_depth+6>
+        }
+        texture { pigment { color Gray60 } }
+    }
+} // ende D
 
 // Haus F
 union {

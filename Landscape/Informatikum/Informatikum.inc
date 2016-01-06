@@ -1,9 +1,9 @@
 //--------------------------------------------------------------------------
-// author:  Sibel Toprak, Konstantin Möllers
+// author:  Sibel Toprak, Konstantin M√∂llers
 // date:    2016-01-01
 //--------------------------------------------------------------------------
 
-// Alle Maße in Dezimetern (10 dm = 1 m)
+// Alle Ma√üe in Dezimetern (10 dm = 1 m)
 
 #declare level_height = 35;                
 
@@ -12,17 +12,50 @@
                     finish { diffuse 0.1 reflection 0.2  
                              specular 0.8 roughness 0.0003 phong 1 phong_size 400}
                    } // end of texture
+//#declare Milchglas = texture { pigment{ rgbf <0.94, 0.98, 1, 0.8> }
+//                    finish { diffuse 0.5 reflection 0.05
+//                             specular 0.8 roughness 0.003 phong 1 phong_size 400}
+//                   } // end of texture
+#declare Milchglas = texture {pigment { rgbf <0.94, 0.98, 1, 0.8> }
+                                  normal {bumps 0.02}
+                                  finish {reflection 0.2
+                                         specular 0.1
+                                         roughness 1
+                                         refraction 0.4
+                                         ior 1.2
+                                         crand 0.02}
+                                 scale 0.01
+                         }
 #declare Ziegel = texture{
                           pigment{ brick
                                    color White  // Fugenfarbe
                                    color rgb<0.8,0.25,0.1>// Ziegelfarbe
-                                   brick_size <2, 1, 2 >
+                                   brick_size <4, 2, 1>
                                    // Ziegelformat in x-,y-,z-Richtung
                                    mortar 0.08 // Fugendicke 
                                  }
                           normal { wrinkles 0.75 scale 0.01}
                           finish { diffuse 0.9 phong 0.2}
                   } // end of texture
+#declare ZiegelZ = texture{
+                          pigment{ brick
+                                   color White  // Fugenfarbe
+                                   color rgb<0.8,0.25,0.1>// Ziegelfarbe
+                                   brick_size <1, 2, 4>
+                                   // Ziegelformat in x-,y-,z-Richtung
+                                   mortar 0.08 // Fugendicke
+                                 }
+                          normal { wrinkles 0.75 scale 0.01}
+                          finish { diffuse 0.9 phong 0.2}
+                  } // end of texture
+
+#declare Dach =
+      texture{ pigment{ color rgb<1,1,1>*0.4}
+               normal { bumps 0.25 scale 0.005}
+               finish { diffuse 0.9 phong 0.1}
+             } // end of texture
+
+#declare Innen = texture{ pigment { color Brass } }
 
 // Haus A1
 #declare A1_x      = 620;
@@ -73,10 +106,10 @@
 #declare C2_levels = 1;
 
 // Haus C3
-#declare C3_x      = 80;
-#declare C3_z      = 570;
-#declare C3_width  = 90;
-#declare C3_depth  = 40;
+#declare C3_x      = 55;
+#declare C3_z      = 620;
+#declare C3_width  = 60;
+#declare C3_depth  = 100;
 #declare C3_color  = <0, 255, 255> / 255;
 #declare C3_levels = 3;
 
@@ -154,14 +187,19 @@
                             look_at   <F1_x+50 , 3*level_height+17, F1_z-F1_depth-10>}  
 
 #declare Camera_HausB = camera {angle 105
-                            location  <B1_x+B1_width/2 - 100, 100, B1_z+200>
+                            location  <B1_x+B1_width/2 - 100, 100, B1_z+100>
                             right     x*image_width/image_height
                             look_at   <B1_x+B1_width/2, 50, B1_z-B1_depth>}  
+
+#declare Camera_HausC = camera {angle 105
+                            location  <200+C1_x+C1_width/2, 50, C1_z-C1_depth-170>
+                            right     x*image_width/image_height
+                            look_at   <C1_x+C1_width/2, 25.0 , C1_z>}
 
 #declare Camera_HausD = camera {angle 105
                             location  <100+D1_x+D1_width/2, 100, D1_z-D1_depth-300>
                             right     x*image_width/image_height
-                            look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}                         
+                            look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}
 
 #macro Haus(px, pz, pwidth, pdepth, plevels, pcolor)
 	box {
@@ -169,4 +207,17 @@
 		<px + pwidth, level_height * plevels, pz>
 		texture { pigment { color rgb pcolor } }
 	}
+#end
+
+#macro Wand(pWidth, pHeight)
+	box {
+		<0, 0, 0>
+		<pWidth, pHeight, 2>
+		texture { Ziegel }
+	}
+#end
+
+#macro calcLevel(level, fundament, h)
+    #declare y1 = level * level_height + fundament;
+    #declare y2 = y1 + h;
 #end

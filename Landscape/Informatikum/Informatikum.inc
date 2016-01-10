@@ -32,7 +32,7 @@
                                    color rgb<0.8,0.25,0.1>// Ziegelfarbe
                                    brick_size <4, 2, 1>
                                    // Ziegelformat in x-,y-,z-Richtung
-                                   mortar 0.08 // Fugendicke 
+                                   mortar 0.2 // Fugendicke
                                  }
                           normal { wrinkles 0.75 scale 0.01}
                           finish { diffuse 0.9 phong 0.2}
@@ -43,7 +43,7 @@
                                    color rgb<0.8,0.25,0.1>// Ziegelfarbe
                                    brick_size <1, 2, 4>
                                    // Ziegelformat in x-,y-,z-Richtung
-                                   mortar 0.08 // Fugendicke
+                                   mortar 0.2 // Fugendicke
                                  }
                           normal { wrinkles 0.75 scale 0.01}
                           finish { diffuse 0.9 phong 0.2}
@@ -56,6 +56,7 @@
              } // end of texture
 
 #declare Innen = texture{ pigment { color Brass } }
+#declare Waende = texture{ pigment { color Gray90 } }
 
 // Haus A1
 #declare A1_x      = 620;
@@ -161,7 +162,7 @@
 #declare H_width   = 190;
 #declare H_depth   = 90;
 #declare H_color   = <0, 169, 157> / 255;
-#declare H_levels  = 2;
+#declare H_levels  = 1;
 
 // Haus R
 #declare R_x       = 1220;
@@ -200,6 +201,11 @@
                             location  <100+D1_x+D1_width/2, 100, D1_z-D1_depth-300>
                             right     x*image_width/image_height
                             look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}
+
+#declare Camera_HausG = camera {angle 105
+                            location  <G_x - 150,       50,     G_z-G_depth/2>
+                            right     x*image_width/image_height
+                            look_at   <G_x+G_width/2,   50.0,   G_z-G_depth/2>}
 
 #macro Haus(px, pz, pwidth, pdepth, plevels, pcolor)
 	box {

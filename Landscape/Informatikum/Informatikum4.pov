@@ -126,6 +126,61 @@ pigment{ gradient <0,1,0>
     }
 #end
 
+// Haus A
+
+#local x1 = A1_x;
+#local x2 = A1_x + A1_width;
+#local y1 = 0;
+#local y2 = A1_levels * level_height;
+#local z1 = A1_z - A1_depth;
+#local z2 = A1_z;
+difference {
+    HausKasten(texture { Waende }, texture { Waende })
+
+    // Fenster ausschneiden
+    #local G_win = 3;
+    #local G_window_width = 20;
+    #for (i, 0, G_win - 1)
+        #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
+        #local zz2 = zz1 + G_window_width;
+        #for (level, 0, 1)
+            calcLevel(level, 22, 17)
+            box {
+                <x1-1,y1,zz1>
+                <x2+1,y2,zz2>
+                texture { Innen }
+            }
+        #end
+    #end
+}
+
+// Fenster einsetzen
+#for (i, 0, G_win - 1)
+    #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
+    #local zz2 = zz1 + G_window_width;
+    #for (level, 0, 1)
+        calcLevel(level, 22, 17)
+        box {
+            <x1,y1,zz1>
+            <x1 + .1,y2,zz2>
+            texture { Fenster }
+        }
+        box {
+            <x2 - .1,y1,zz1>
+            <x2,y2,zz2>
+            texture { Fenster }
+        }
+    #end
+#end
+
+#local x1 = A2_x;
+#local x2 = A2_x + A2_width;
+#local y1 = 0;
+#local y2 = A2_levels * level_height;
+#local z1 = A2_z - A2_depth;
+#local z2 = A2_z;
+HausKasten(texture { Waende }, texture { Waende })
+
 // Haus B
 
 #local x1 = B1_x;
@@ -134,7 +189,7 @@ pigment{ gradient <0,1,0>
 #local z1 = B1_z - B1_depth;
 #local z2 = B1_z;
 difference {
-    HausKasten(texture { B1_tex }, texture { pigment { color White } })
+    HausKasten(texture { B1_tex }, texture { Waende })
 
     #local B1_win = 10;
     #local B1_window_width = 30;
@@ -253,19 +308,19 @@ difference {
             box {
                 <x1 + ix*(x2 - x1)/3 - 1, y1, z1-1>
                 <x1 + ix*(x2 - x1)/3 + 1, y2, z1+1>
-                texture { pigment { color White } }
+                texture { Waende }
             }
         #end
         #for (ix, 0, 8)
             box {
                 <x1 - 1, y1, z1-1 + ix*(z2 - z1)/8>
                 <x1 + 1, y2, z1+1 + ix*(z2 - z1)/8>
-                texture { pigment { color White } }
+                texture { Waende }
             }
             box {
                 <x2 - 1, y1, z1-1 + ix*(z2 - z1)/8>
                 <x2 + 1, y2, z1+1 + ix*(z2 - z1)/8>
-                texture { pigment { color White } }
+                texture { Waende }
             }
         #end
         #for (iy, 0, 3)
@@ -273,17 +328,17 @@ difference {
             box {
                 <x1 - 1, y1 - 1 + offs, z1 - 1>
                 <x2 + 1, y1 + 1 + offs, z1 + 1>
-                texture { pigment { color White } }
+                texture { Waende }
             }
             box {
                 <x1 - 1, y1 - 1 + offs, z1 - 1>
                 <x1 + 1, y1 + 1 + offs, z2 + 1>
-                texture { pigment { color White } }
+                texture { Waende }
             }
             box {
                 <x2 - 1, y1 - 1 + offs, z1 - 1>
                 <x2 + 1, y1 + 1 + offs, z2 + 1>
-                texture { pigment { color White } }
+                texture { Waende }
             }
         #end
         box {
@@ -360,7 +415,7 @@ difference {
             <D2_x,0,D2_z-D2_depth>
             <D2_x+D2_width,D2_levels*level_height,D2_z>
         }
-        texture { pigment { color White } }
+        texture { Waende }
     }
 
     union {
@@ -615,7 +670,7 @@ union {
         box {
         	<F1_x,0,F1_z-F1_depth>
         	<F1_x+F1_width,F1_levels*level_height+15,F1_z>
-        	texture { pigment { color White } }
+        	texture { Waende }
         	hollow on
         }
         #for (level, 1, 5)
@@ -644,7 +699,7 @@ union {
         box {
         	<F1_x+30 + strebe*12 - 0.5, level_height,F1_z-F1_depth-0.5>
             <F1_x+30 + strebe*12 + 0.5, F1_levels*level_height+15,F1_z-F1_depth>
-        	texture { pigment { color White } }
+        	texture { Waende }
         }
     #end
     box {
@@ -664,10 +719,75 @@ union {
     }
 }
 
-Haus(A1_x, A1_z, A1_width, A1_depth, A1_levels, A1_color)
-Haus(A2_x, A2_z, A2_width, A2_depth, A2_levels, A2_color)
+// Haus G
+
+#local x1 = G_x;
+#local x2 = G_x + G_width;
+#local y1 = 0;
+#local y2 = G_levels * level_height + 15;
+#local z1 = G_z - G_depth;
+#local z2 = G_z - G_depth + 180;
+HausKasten(texture { Ziegel }, texture { ZiegelZ })
+
+#local z1 = G_z - G_depth + 180;
+#local z2 = G_z;
+difference {
+    HausKasten(texture { Waende }, texture { Waende })
+
+    // Fenster ausschneiden
+    #local z2 = H_z - H_depth;
+    #local G_win = 10;
+    #local G_window_width = 30;
+    #for (i, 0, G_win - 1)
+        #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
+        #local zz2 = zz1 + G_window_width;
+        #for (level, 0, 1)
+            calcLevel(level, 22, 17)
+            box {
+                <x1-1,y1,zz1>
+                <x2+1,y2,zz2>
+                texture { Innen }
+            }
+        #end
+    #end
+}
+
+// Fenster einsetzen
+#for (i, 0, G_win - 1)
+    #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
+    #local zz2 = zz1 + G_window_width;
+    #for (level, 0, 1)
+        calcLevel(level, 22, 17)
+        box {
+            <x1,y1,zz1>
+            <x1 + .1,y2,zz2>
+            texture { Fenster }
+        }
+        box {
+            <x2 - .1,y1,zz1>
+            <x2,y2,zz2>
+            texture { Fenster }
+        }
+    #end
+#end
+
+// Haus H
+#local x1 = H_x;
+#local x2 = H_x + H_width;
+#local y1 = 0;
+#local y2 = H_levels * level_height;
+#local z1 = H_z - H_depth;
+#local z2 = H_z;
+HausKasten(texture { Waende }, texture { Waende })
+
+// Haus R
+#local x1 = R_x;
+#local x2 = R_x + R_width;
+#local y1 = 0;
+#local y2 = R_levels * level_height;
+#local z1 = R_z - R_depth;
+#local z2 = R_z;
+HausKasten(texture { Waende }, texture { Waende })
+
 Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
 Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
-Haus(G_x,  G_z,  G_width,  G_depth,  G_levels,  G_color)
-Haus(H_x,  H_z,  H_width,  H_depth,  H_levels,  H_color)
-Haus(R_x, R_z, R_width, R_depth, R_levels, R_color)

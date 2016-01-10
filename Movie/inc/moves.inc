@@ -178,6 +178,7 @@ merge
     translate <0, 1.3, 0>
 }
 
+/*
 #declare crossstepping_minimon =
 merge
 {
@@ -211,7 +212,7 @@ merge
     }
     rotate <0, -39 * sin(8*pi*time), 0>
     translate <sin(16*pi*time), Bounce(time) + 1.3, -8* time>
-}
+} */
 
 //waiting_minimon
                 

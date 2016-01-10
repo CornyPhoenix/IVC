@@ -9,30 +9,24 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 // includes ----------------------------------------------------------------
 #include "colors.inc"
-#include "textures.inc"
+#include "textures.inc" 
+#include "rand.inc"
 //--------------------------------------------------------------------------
-// parameters and variables ------------------------------------------------
-#declare time = clock;
-#declare dist_z = 300; 
-#declare dist_x = 5;
-#declare dist_min =1.4;
+// declares ----------------------------------------------------------------
+#declare global_clock = clock; // initial: 0, final: 2
+
+#declare random_x = seed(1234);
+#declare random_y = seed(2345);
+#declare random_numbers = seed(3456); 
 //--------------------------------------------------------------------------
-// light sources -----------------------------------------------------------
+// light source ------------------------------------------------------------
 light_source
 {
-	<20, 35, -2>
+	<-100, 10, 0>
 	color rgb <1, 1, 1>
 }
 //--------------------------------------------------------------------------
-// camera ------------------------------------------------------------------ 
-camera
-{
-	location <0, dist_min, -dist_min-0.25-dist_z*(1-time)*(1-time)>
-	right x*image_width/image_height
-	look_at <10*sin(pi*time), dist_min, -10*cos(pi*time)>	
-}
-//--------------------------------------------------------------------------
-// background --------------------------------------------------------------
+// space -------------------------------------------------------------------
 sky_sphere
 {
     pigment
@@ -49,7 +43,7 @@ sky_sphere
 // earth -------------------------------------------------------------------
 sphere
 {
-    <0, 0, 0>, 2
+    <0, 0, 0>, 5
     pigment
     {
         image_map
@@ -61,12 +55,14 @@ sphere
     rotate -80*y
     rotate -10*x
 }
-
 //--------------------------------------------------------------------------
-// glowing moving object ---------------------------------------------------
+// lights ------------------------------------------------------------------
+
+// one light ball
+#declare light_ball =  
 sphere
 {
-    0, 0.5
+    0, 1
     pigment { rgbt 1 }
     hollow
     interior
@@ -79,29 +75,126 @@ sphere
                 spherical density_map
                 {
                     [0 rgb 0]
-                    [0.5 rgb <0.75,0.5,0>]
-                    [0.75 rgb <1,1,0>]
+                    [0.4 rgb <1,0.5,0>]
+                    [0.8 rgb <1,1,0.25>]
                     [1 rgb 1]
                 }
             }
         }
     }
-    //translate <dist_x*(1-time), 1.5, -1.5-dist_z*(1-sin(0.5*pi*time))>
-    translate <0, dist_min, -dist_min-dist_z*(1-sin(0.5*pi*time))>
 }
-/*
-sphere
-{
-    <0, 0, 0>, 0.01
-    texture
+
+// a sequence of hundred light balls,
+// each one randomly placed around the z-axis
+#declare light_balls =
+union
+{   
+    #local scaling_factor = 0.3;   
+    #local counter = 1;
+    #local final = 100;
+    
+    object
     {
-        pigment { color White }
-        finish
-        {
-            ambient 100
-        }
-    }    
-    interior { media { emission 100 } } 
-    translate <dist_x*(1-time), 1.3, -1.3-dist_z*(1-sin(0.5*pi*time))>
+        light_ball
+        //scale scaling_factor
+    }
+    
+    #while (counter < final)
+    
+    object
+    {
+        light_ball
+        scale scaling_factor
+        translate <-1+2*rand(random_x), -1+2*rand(random_y), -counter>
+    }     
+    #local counter = counter + 1;
+    #end
 }
-*/
+
+//--------------------------------------------------------------------------
+// scene 01 ----------------------------------------------------------------
+// unidentifiable lights from outer space moving closer to earth
+#local scene_switch = 1.5;
+
+#if (global_clock < scene_switch)
+    
+    #local local_clock = 1/scene_switch * global_clock;
+    #local position_camera = <0, 0, -50>;
+    #local n = 12;
+    #local p1 = 8;
+    #local p2 = 9;
+    
+    object
+    {
+        light_balls
+        translate position_camera + <0, 0, 10*(-p1+n*local_clock)>
+    }
+
+    // camera directed to where lights come from
+    #if (local_clock < p1/n)
+    
+        #local another_local_clock = n/p1 * local_clock;
+    
+        camera
+        {
+        	location position_camera
+        	right image_width/image_height * x
+        	look_at position_camera - <0, 0, 1>
+        }
+    
+    #end 
+    
+    // following the lights while moving camera towards earth
+    #if (local_clock >= p1/n & local_clock < p2/n)
+    
+        #local another_local_clock = local_clock*n - p1;
+    
+        camera
+        {
+        	location position_camera
+        	right image_width/image_height * x
+        	look_at position_camera - another_local_clock * <sin(pi*another_local_clock), 0, cos(pi*another_local_clock)> 
+        }
+    
+    #end
+    
+    // camera directed towards earth
+    #if (local_clock >= p2/n)
+     
+        #local another_local_clock = local_clock*n - p2;
+        
+        camera
+        {
+        	location position_camera
+        	right image_width/image_height * x
+        	look_at position_camera + <0, 0, 1>
+        }
+    
+    #end    
+    
+#end
+
+//--------------------------------------------------------------------------
+// scene 02 ----------------------------------------------------------------
+// unidentifiable lights from outer space reaching earth
+
+#if (global_clock >= scene_switch)
+
+    #local local_clock = (global_clock - scene_switch) * 2;
+    
+    camera
+    {
+    	location <0, 7.5*local_clock, -25+(30*local_clock*local_clock)>
+    	right x*image_width/image_height
+    	look_at <10*sin(pi*local_clock), 0, -10*cos(pi*local_clock)>	
+    }
+    
+    object
+    {
+        light_balls
+        translate <0, 0, -25*(1-local_clock)>
+    }
+    
+    
+#end
+

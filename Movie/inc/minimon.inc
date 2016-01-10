@@ -23,8 +23,8 @@ global_settings{ assumed_gamma 1.0 }
 // w.r.t. front view of minimon
 #declare offset_arm_right = <-1, 0, 0>;
 #declare offset_arm_left = <1, 0, 0>;
-#declare offset_foot_right = <-0.4, -1, -0>;
-#declare offset_foot_left = <0.4, -1, -0>;
+#declare offset_foot_right = <-0.5, -1, -0>;
+#declare offset_foot_left = <0.5, -1, -0>;
 //--------------------------------------------------------------------------
 // textures ----------------------------------------------------------------
 #declare skin =

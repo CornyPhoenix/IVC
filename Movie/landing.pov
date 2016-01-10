@@ -1,5 +1,3 @@
-//--------------------------------------------------------------------------
-// scene -------------------------------------------------------------------
 // PoVRay 3.7 Scene File " ... .pov"
 // author:  ...
 // date:    ...
@@ -12,18 +10,14 @@ global_settings{ assumed_gamma 1.0 }
 #include "inc/moves.inc"
 //--------------------------------------------------------------------------
 // parameters and variables ------------------------------------------------ 
-#declare time = clock;          
-//--------------------------------------------------------------------------
-// camera ------------------------------------------------------------------
-
-/*camera
-{
-	perspective angle 100
-	location <0, 0, -5>
-	right x*image_width/image_height
-	look_at <0, 0, 0>
-	rotate <0, 360*time, 0>
-}*/ 
+#declare time = clock;
+// -------------------------------------------------------------------------        
+// light source ------------------------------------------------------------
+// general light definition
+light_source {
+  <-10, 10, -10>      // position of the light source
+  color rgb 1.0     // color of the light
+}
 
 
 // PoVRay 3.7 Scene File " ... .pov"
@@ -46,8 +40,27 @@ global_settings{ assumed_gamma 1.0 }
 #include "functions.inc"
 #include "math.inc"
 #include "transforms.inc"
+//--------------------------------------------------------------------------
+// camera ------------------------------------------------------------------
+#declare Camera_0 = camera {perspective angle 75               // front view
+                            location  <0.0 , 1.0 ,-3.0>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>}
+#declare Camera_1 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
+                            location  <2.0 , 2.5 ,-3.0>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>}
+#declare Camera_2 = camera {/*ultra_wide_angle*/ angle 90  //right side view
+                            location  <3.0 , 1.0 , 0.0>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>}
+#declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90        // top view
+                            location  <0.0 , 3.0 ,-0.001>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>}
+//camera{Camera_0}
 // sun ----------------------------------------------------------------------
-light_source{< 300,300,-300> color White}
+light_source{< 3000,3000,-3000> color White}
 // sky ----------------------------------------------------------------------
 sky_sphere { pigment { gradient <0,1,0>
                        color_map { [0.00 rgb <0.6,0.7,1.0>]
@@ -65,30 +78,39 @@ plane{ <0,1,0>, 0
                 finish { phong 0.1}
               } // end of texture
      } // end of plane
-// end of sphere ----------------------------------- 
+
+//--------------------------------------------------------------------------
+// camera ------------------------------------------------------------------
 
 camera
 {
-    // perspective angle 100 // front view
-    location <0.0, 5, ((-8)*time)-10> // location <0.0, 1, -5>
-    right x*image_width/image_height
-    look_at <0.0 , 1 , 0.0> //rotate <0,360*clock, 0>
+	location  <0.0, 3*time, -2-(4*time*time)>
+	right x*image_width/image_height
+	look_at   <0.0 , 1-time, 0.0>
+	rotate <0, 360*time, 0>
 } 
 
+/*#declare light_ball =
+light_source
+{
+    <0, 0, 0>
+    color rgb <1.0, 1.0, 0.25>
+    looks_like
+    {
+        sphere
+        {
+            0, 1
+            pigment { rgbf 1 } 
+            finish { specular 1 }
+        }
+    }
+}
 
-#declare Dx = 4.00; // distance in x
-#declare Dz = 4.00;
-#declare NrX = -3;      // startX
-#declare EndNrX = 4;   // endX
-#while (NrX < EndNrX) // <-- loop X
- #declare NrZ = 0;     // startZ
- #declare EndNrZ = 7;  // endZ
- #while (NrZ < EndNrZ) // <- loop Z
-  object{ walking_minimon
-          translate<NrX*Dx, 0, NrZ*Dz>}
- #declare NrZ = NrZ + 1;  // next NrZ
- #end // --------------- end of loop Z
-#declare NrX = NrX + 1;// next NrX
-#end //
+object
+{
+    light_ball
+    translate <0,1.3,0>
+}*/
 
 
+waiting_minimon

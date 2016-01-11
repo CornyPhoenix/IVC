@@ -23,7 +23,7 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 
 // camera ------------------------------------------------------------------
-camera{Camera_SO}
+camera{Camera_HausF}
 
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
@@ -95,8 +95,7 @@ pigment{ gradient <0,1,0>
 
 #declare y1 = 0;
 
-#macro HausKasten(tex1, tex2)
-    #local overlap = 10;
+#macro WandKasten(tex1, tex2)
     union {
         box {
             <x1,        y1,     z1>
@@ -118,6 +117,13 @@ pigment{ gradient <0,1,0>
             <x2,        y2,     z2>
             texture { tex2 }
         }
+    }
+#end
+
+#macro HausKasten(tex1, tex2)
+    #local overlap = 10;
+    union {
+        WandKasten(tex1, tex2)
         box {
             <x1 - overlap,        y2,     z1 - overlap>
             <x2 + overlap,        y2+2,     z2 + overlap>
@@ -138,11 +144,11 @@ difference {
     HausKasten(texture { Waende }, texture { Waende })
 
     // Fenster ausschneiden
-    #local G_win = 3;
-    #local G_window_width = 20;
-    #for (i, 0, G_win - 1)
-        #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
-        #local zz2 = zz1 + G_window_width;
+    #local A1_win = 3;
+    #local A1_window_width = 20;
+    #for (i, 0, A1_win - 1)
+        #local zz1 = z1 + (i + .5) * (z2 - z1) / A1_win - A1_window_width / 2;
+        #local zz2 = zz1 + A1_window_width;
         #for (level, 0, 1)
             calcLevel(level, 22, 17)
             box {
@@ -155,9 +161,9 @@ difference {
 }
 
 // Fenster einsetzen
-#for (i, 0, G_win - 1)
-    #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
-    #local zz2 = zz1 + G_window_width;
+#for (i, 0, A1_win - 1)
+    #local zz1 = z1 + (i + .5) * (z2 - z1) / A1_win - A1_window_width / 2;
+    #local zz2 = zz1 + A1_window_width;
     #for (level, 0, 1)
         calcLevel(level, 22, 17)
         box {
@@ -724,25 +730,33 @@ union {
 #local x1 = G_x;
 #local x2 = G_x + G_width;
 #local y1 = 0;
-#local y2 = G_levels * level_height + 15;
+#local y2 = 15;
 #local z1 = G_z - G_depth;
+#local z2 = G_z;
+WandKasten(texture { Ziegel }, texture { ZiegelZ })
+
+#local y1 = 15;
+#local y2 = G_levels * level_height + 15;
 #local z2 = G_z - G_depth + 180;
 HausKasten(texture { Ziegel }, texture { ZiegelZ })
 
-#local z1 = G_z - G_depth + 180;
+#local z1 = H_z - H_depth - 20;
 #local z2 = G_z;
+HausKasten(texture { Ziegel }, texture { ZiegelZ })
+
+#local z2 = z1;
+#local z1 = G_z - G_depth + 180;
 difference {
     HausKasten(texture { Waende }, texture { Waende })
 
     // Fenster ausschneiden
-    #local z2 = H_z - H_depth;
-    #local G_win = 10;
-    #local G_window_width = 30;
+    #local G_win = 15;
+    #local G_window_width = 25;
     #for (i, 0, G_win - 1)
         #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
         #local zz2 = zz1 + G_window_width;
         #for (level, 0, 1)
-            calcLevel(level, 22, 17)
+            calcLevel(level, 21, 21)
             box {
                 <x1-1,y1,zz1>
                 <x2+1,y2,zz2>
@@ -752,12 +766,12 @@ difference {
     #end
 }
 
-// Fenster einsetzen
+// Fenster einsetzen, Zwischenstreben
 #for (i, 0, G_win - 1)
     #local zz1 = z1 + (i + .5) * (z2 - z1) / G_win - G_window_width / 2;
     #local zz2 = zz1 + G_window_width;
     #for (level, 0, 1)
-        calcLevel(level, 22, 17)
+        calcLevel(level, 21, 21)
         box {
             <x1,y1,zz1>
             <x1 + .1,y2,zz2>
@@ -768,6 +782,40 @@ difference {
             <x2,y2,zz2>
             texture { Fenster }
         }
+        // Fensterrahmen links
+        #for (rechts, 0, 1)
+            #local xx1 = x1 - 1 + rechts * (G_width + 1);
+            #local xx2 = xx1 + 1;
+            // Streber!
+            box {
+                <xx1, y1 - 6,zz1-3>
+                <xx2, y2 + 8,    zz1-1>
+                texture { pigment { color Gray30 } }
+            }
+            union {
+                box {
+                    <xx1,    y1,     zz1>
+                    <xx2,    y1+1,   zz2>
+                }
+                box {
+                    <xx1,    y2-1,   zz1>
+                    <xx2,    y2,     zz2>
+                }
+                box {
+                    <xx1,    y1,     zz1>
+                    <xx2,    y2,     zz1 + 1>
+                }
+                box {
+                    <xx1,    y1,     zz2 - 1>
+                    <xx2,    y2,     zz2>
+                }
+                box {
+                    <xx1,    y1,     zz1 + G_window_width/2 - .5>
+                    <xx2,    y2,     zz1 + G_window_width/2 + .5>
+                }
+                texture { pigment { color VeryDarkBrown } }
+            }
+        #end
     #end
 #end
 

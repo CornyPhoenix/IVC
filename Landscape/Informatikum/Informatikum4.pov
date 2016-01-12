@@ -23,7 +23,7 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 
 // camera ------------------------------------------------------------------
-camera{Camera_HausF}
+camera{Camera_SO}
 
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
@@ -44,7 +44,7 @@ fog{fog_type   2
     fog_alt    2.0
     turbulence 0.8}
 // ground ------------------------------------------------------------------
-plane { <0,-0.1,0>, 0 
+plane { <0,-0.1,0>, 0
         texture{ pigment{ color rgb<.24,0.35,0.23> }
 	         normal { bumps 0.75 scale 0.015 }
                  finish { phong 0.1 }
@@ -62,12 +62,12 @@ box {
 	         normal { bumps 0.75 scale .000017647 }
                }*/
 	texture {
-		pigment { 
-			image_map { 
+		pigment {
+			image_map {
 				png "texture.png"
-				map_type 0 
-				interpolate 2 			
-		  }		  
+				map_type 0
+				interpolate 2
+		  }
 		}
 	}
 	scale <1800, 1800, 1>
@@ -839,3 +839,26 @@ HausKasten(texture { Waende }, texture { Waende })
 
 Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
 Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
+
+// Trauerweide
+#include "weeping_willow.inc"
+#declare TREE_SCALE = level_height*.4;
+#declare HEIGHT = weeping_willow_13_height * 1.3 * TREE_SCALE;
+#declare WIDTH = HEIGHT*400/600;
+//camera { orthographic location <1025, HEIGHT*0.45, 525-100>
+//         right <WIDTH, 0, 0> up <0, HEIGHT, 0>
+//         look_at <1025, HEIGHT*0.45, 525-80> }
+#macro tree(pos_x, pos_z, p_size, p_rot)
+union {
+    object { weeping_willow_13_stems
+        pigment {color BakersChoc} }
+    object { weeping_willow_13_leaves
+        texture { pigment {color DarkGreen}
+                  finish { ambient 0.15 diffuse 0.8 }}}
+    scale p_size rotate p_rot*y
+    translate <pos_x, 0, pos_z>
+}
+#end
+tree(1025,  525, 1.3 * TREE_SCALE, 100)
+tree( 400,  600,       TREE_SCALE, 200)
+tree(1040,  200,  .8 * TREE_SCALE, 300)

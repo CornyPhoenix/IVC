@@ -1,3 +1,0 @@
-scene 1 - outerspace.pov
-scene 2 - aerospace.pov
-scene 3 - campus.pov

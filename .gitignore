@@ -13,3 +13,5 @@ doc.pdf
 IVChandouts.pdf
 IVCslidesInc.pdf
 Landscape/Informatikum/texture.png
+/Build
+!/Build/.gitkeep

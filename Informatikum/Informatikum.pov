@@ -19,11 +19,11 @@ global_settings{ assumed_gamma 1.0 }
 #include "functions.inc"
 #include "math.inc"
 #include "transforms.inc"
-#include "Informatikum.inc"
+#include "Informatikum/Informatikum.inc"
 //--------------------------------------------------------------------------
 
 // camera ------------------------------------------------------------------
-camera{Camera_HausC}
+camera{Camera_AusF}
 
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
@@ -51,4 +51,4 @@ plane { <0,-0.1,0>, 0
                } // end of texture
       } // end of plane
 
-#include "Informatikum4.pov"
+#include "Informatikum/Informatikum4.pov"

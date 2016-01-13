@@ -1,56 +1,4 @@
 //--------------------------------------------------------------------------
-// author:  Sibel Toprak, Konstantin M�llers
-// date:    2016-01-01
-//--------------------------------------------------------------------------
-#version 3.7;
-global_settings{ assumed_gamma 1.0 }
-#default{ finish{ ambient 0.1 diffuse 0.9 }} 
-
-//--------------------------------------------------------------------------
-#include "colors.inc"
-#include "textures.inc"
-#include "glass.inc"
-#include "metals.inc"
-#include "golds.inc"
-#include "stones.inc"
-#include "woods.inc"
-#include "shapes.inc"
-#include "shapes2.inc"
-#include "functions.inc"
-#include "math.inc"
-#include "transforms.inc"
-#include "Informatikum.inc"
-//--------------------------------------------------------------------------
-
-// camera ------------------------------------------------------------------
-camera{Camera_HausC}
-
-// sun ---------------------------------------------------------------------
-light_source{<1500,2500,-2500> color White}
-// sky ---------------------------------------------------------------------
-plane{<0,1,0>,1 hollow  
-       texture{ pigment{ bozo turbulence 0.76
-                         color_map { [0.5 rgb <0.20, 0.20, 1.0>]
-                                     [0.6 rgb <1,1,1>]
-                                     [1.0 rgb <0.5,0.5,0.5>]}
-                       }
-                finish {ambient 1 diffuse 0} }      
-       scale 10000}
-// fog ---------------------------------------------------------------------
-fog{fog_type   2
-    distance   50
-    color      White
-    fog_offset 0.1
-    fog_alt    2.0
-    turbulence 0.8}
-// ground ------------------------------------------------------------------
-plane { <0,-0.1,0>, 0
-        texture{ pigment{ color rgb<.24,0.35,0.23> }
-	         normal { bumps 0.75 scale 0.015 }
-                 finish { phong 0.1 }
-               } // end of texture
-      } // end of plane
-//--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------
 
@@ -64,7 +12,7 @@ box {
 	texture {
 		pigment {
 			image_map {
-				png "texture.png"
+				png "Textures/texture.png"
 				map_type 0
 				interpolate 2
 		  }
@@ -132,8 +80,7 @@ pigment{ gradient <0,1,0>
     }
 #end
 
-// Haus A
-
+// Haus A ------------------------------------------------------------------
 #local x1 = A1_x;
 #local x2 = A1_x + A1_width;
 #local y1 = 0;
@@ -187,8 +134,7 @@ difference {
 #local z2 = A2_z;
 HausKasten(texture { Waende }, texture { Waende })
 
-// Haus B
-
+// Haus B ------------------------------------------------------------------
 #local x1 = B1_x;
 #local x2 = B1_x + B1_width;
 #local y2 = B1_levels * level_height + 15;
@@ -232,7 +178,7 @@ difference {
     #end
 #end
 
-// Haus C
+// Haus C ------------------------------------------------------------------
 #local x1 = C1_x;
 #local x2 = C1_x + C1_width;
 #local y1 = 0;
@@ -389,7 +335,7 @@ box {
     texture { Dach }
 }
 
-// Überdach
+// Haus C - Gläserner Überbau ---------------------------------------------
 #local x1 = C3_x + C3_width;
 #local x2 = C1_x + C1_width;
 #local z1 = C3_z - C3_depth - 5;
@@ -400,13 +346,46 @@ box {
     texture { Dach }
 }
 
-box {
-	<C2_x,          0,                      C2_z-C2_depth>
-	<C2_x+C2_width, C2_levels*level_height, C2_z>
-	texture { Ziegel }
+// Haus C - Brücke zu Haus D ----------------------------------------------
+#local z1 = C2_z-C2_depth;
+#local x2 = C2_x+C2_width;
+difference {
+    box {
+        <C2_x,          0,                      z1>
+        <x2, C2_levels*level_height + 15, C2_z>
+        texture { Ziegel }
+    }
+
+    box {
+        <C2_x + 1,          0,                      z1 + 1>
+        <x2 - 1, C2_levels*level_height + 14, C2_z - 1>
+        texture { Innen }
+    }
+
+    #local ww = 3;
+    #local zz = z1;
+    #for (i, 0, ww - 1)
+        #local xx1 = C2_x + i * (C2_width / ww) + 2;
+        #local xx2 = xx1 + C2_width / ww - 4;
+        box {
+            <xx1, 10, zz + 1>
+            <xx2, C2_levels*level_height + 5, zz - 1>
+            texture { Innen }
+        }
+    #end
 }
 
-// Haus D
+#for (i, 0, ww - 1)
+    #local xx1 = C2_x + i * (C2_width / ww) + 2;
+    #local xx2 = xx1 + C2_width / ww - 4;
+    box {
+        <xx1, 10, zz>
+        <xx2, C2_levels*level_height + 5, zz + .1>
+        texture { Fenster }
+    }
+#end
+
+// Haus D ------------------------------------------------------------------
 #local window_width=39;
 
 difference {
@@ -819,7 +798,7 @@ difference {
     #end
 #end
 
-// Haus H
+// Haus H ------------------------------------------------------------------
 #local x1 = H_x;
 #local x2 = H_x + H_width;
 #local y1 = 0;
@@ -828,7 +807,7 @@ difference {
 #local z2 = H_z;
 HausKasten(texture { Waende }, texture { Waende })
 
-// Haus R
+// Haus R ------------------------------------------------------------------
 #local x1 = R_x;
 #local x2 = R_x + R_width;
 #local y1 = 0;
@@ -838,10 +817,10 @@ HausKasten(texture { Waende }, texture { Waende })
 HausKasten(texture { Waende }, texture { Waende })
 
 Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
-Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
+//Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
 
-// Trauerweide
-#include "weeping_willow.inc"
+// Trauerweiden ------------------------------------------------------------
+#include "Informatikum/weeping_willow.inc"
 #declare TREE_SCALE = level_height*.4;
 #declare HEIGHT = weeping_willow_13_height * 1.3 * TREE_SCALE;
 #declare WIDTH = HEIGHT*400/600;
@@ -862,3 +841,6 @@ union {
 tree(1025,  525, 1.3 * TREE_SCALE, 100)
 tree( 400,  600,       TREE_SCALE, 200)
 tree(1040,  200,  .8 * TREE_SCALE, 300)
+
+
+// Gebüsche ----------------------------------------------------------------

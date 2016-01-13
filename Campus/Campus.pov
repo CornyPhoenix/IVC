@@ -29,7 +29,7 @@ global_settings{ assumed_gamma 1.0 }
 #declare FRAMES_PER_SECOND = 24.5;
 #declare BPM = 140;
 
-#declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth> + 1*z; 
+#declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth+1>;
 #declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>;
 //--------------------------------------------------------------------------
 // macros ------------------------------------------------------------------
@@ -136,202 +136,217 @@ box {
 	translate <1800, 0, 0>
 }
 
-Haus(A1_x, A1_z, A1_width, A1_depth, A1_levels, A1_color)
-Haus(A2_x, A2_z, A2_width, A2_depth, A2_levels, A2_color)
-Haus(B1_x, B1_z, B1_width, B1_depth, B1_levels, B1_color)
-Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
-Haus(C1_x, C1_z, C1_width, C1_depth, C1_levels, C1_color)
-Haus(C2_x, C2_z, C2_width, C2_depth, C2_levels, C2_color)
-Haus(C3_x, C3_z, C3_width, C3_depth, C3_levels, C3_color)
-Haus(D1_x, D1_z, D1_width, D1_depth, D1_levels, D1_color)
-Haus(D2_x, D2_z, D2_width, D2_depth, D2_levels, D2_color)
-Haus(F1_x, F1_z, F1_width, F1_depth, F1_levels, F1_color)
-Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
-Haus(G_x,  G_z,  G_width,  G_depth,  G_levels,  G_color)
-Haus(H_x,  H_z,  H_width,  H_depth,  H_levels,  H_color)
-Haus(R_x, R_z, R_width, R_depth, R_levels, R_color)
-
 //--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------
+#include "Informatikum/Informatikum4.pov"
 
-//--------------------------------------------------------------------------
-// scene 01 ----------------------------------------------------------------
-// minimon shows itself on top of building D
-// walks to the edge of the roof while camera is following
-     
-#if (global_clock <= 1)
+#switch (clock)
 
-    #local local_clock = global_clock;
-    #local distance_edge = <0, 0, 32>;
-    
-    //minimon
-    #if (local_clock < 1/2)
-    
-        merge
+    //--------------------------------------------------------------------------
+    // scene 03 ----------------------------------------------------------------
+    // minimon shows itself on top of building D
+    // walks to the edge of the roof while camera is following
+    #range (0,1)
+        #warning "Scene 03"
+        #local local_clock = global_clock;
+        #local distance_edge = <0, 0, 32>;
+
+        //minimon
+        #if (local_clock < 1/2)
+
+            merge
+            {
+                object { upper_head }
+                object { lower_head }
+                object
+                {
+                    arm
+                    rotate <Swing(local_clock), 0, 0>
+                    translate offset_arm_right
+                }
+                object
+                {
+                    arm
+                    rotate <Swing(local_clock), 180, 0>
+                    translate offset_arm_left
+                }
+                object
+                {
+                    foot
+                    rotate <Paddle(local_clock), 0, 0>
+                    translate offset_foot_right
+
+                }
+                object
+                {
+                    foot
+                    rotate <Paddle(-local_clock), 0, 0>
+                    translate offset_foot_left
+
+                }
+                //rotate <0, 0, Totter(local_clock)>
+                translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + distance_edge*(1-local_clock)
+            }
+
+        #end
+
+        #if (local_clock >= 1/2 & local_clock <= 3/4)
+
+            merge
+            {
+                object { upper_head }
+                object { lower_head }
+                object
+                {
+                    arm
+                    rotate <Swing(local_clock), 0, 0>
+                    translate offset_arm_right
+                }
+                object
+                {
+                    arm
+                    rotate <Swing(local_clock), 180, 0>
+                    translate offset_arm_left
+                }
+                object
+                {
+                    foot
+                    rotate <Paddle(local_clock), 0, 0>
+                    translate offset_foot_right
+
+                }
+                object
+                {
+                    foot
+                    rotate <Paddle(-local_clock), 0, 0>
+                    translate offset_foot_left
+
+                }
+                //rotate <0, 0, Totter(local_clock)>
+                #local another_local_clock = (local_clock - 1/2) * 4;
+                translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + 1/4*distance_edge*(1-local_clock)
+            }
+        #end
+
+        #if (local_clock > 3/4)
+            // arrived at edge
+            object
+            {
+                minimon
+                translate D2_top + <0, 1.3, 0>
+            }
+        #end
+
+        // camera settings
+        camera
         {
-            object { upper_head }
-            object { lower_head }
-            object
-            {
-                arm
-                rotate <Swing(local_clock), 0, 0>
-                translate offset_arm_right
-            }
-            object
-            {
-                arm
-                rotate <Swing(local_clock), 180, 0>
-                translate offset_arm_left
-            }
-            object
-            {
-                foot
-                rotate <Paddle(local_clock), 0, 0>
-                translate offset_foot_right
-                
-            }
-            object
-            {
-                foot
-                rotate <Paddle(-local_clock), 0, 0>
-                translate offset_foot_left
-                
-            }
-            //rotate <0, 0, Totter(local_clock)>
-            translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + distance_edge*(1-local_clock)
-        }    
-            
-    #end
-    
-    #if (local_clock >= 1/2 & local_clock <= 3/4)
+            right image_width/image_height * x
 
-        merge
-        {
-            object { upper_head }
-            object { lower_head }
-            object
-            {
-                arm
-                rotate <Swing(local_clock), 0, 0>
-                translate offset_arm_right
-            }
-            object
-            {
-                arm
-                rotate <Swing(local_clock), 180, 0>
-                translate offset_arm_left
-            }
-            object
-            {
-                foot
-                rotate <Paddle(local_clock), 0, 0>
-                translate offset_foot_right
-                
-            }
-            object
-            {
-                foot
-                rotate <Paddle(-local_clock), 0, 0>
-                translate offset_foot_left
-                
-            }
-            //rotate <0, 0, Totter(local_clock)>
-            #local another_local_clock = (local_clock - 1/2) * 4;
-            translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + 1/4*distance_edge*(1-local_clock)
+            #local position_camera = D2_top + <0, 15, 0>;
+            #local point_focus = D2_top - <0, 0, 1>;
+
+            #if (local_clock < .25)
+                location position_camera + 3/4*distance_edge
+                look_at point_focus + 3/4*distance_edge
+            #end
+
+            #if (local_clock >= .25 & local_clock < .5)
+                location position_camera + distance_edge*(1-local_clock)
+                look_at point_focus + distance_edge*(1-local_clock)
+            #end
+
+            #if (local_clock >= .5)
+                #local another_local_clock = (local_clock - .5) * 2;
+
+                location D2_top - <0, 2 * (1 - another_local_clock), 3>
+                look_at D2_top + <0, 1, 0>
+            #end
         }
-    #end
-    
-    #if (local_clock > 3/4)
-        // arrived at edge
+
+    #break // of scene 03.
+
+    //--------------------------------------------------------------------------
+    // scene 04 ----------------------------------------------------------------
+    #range (1,2)
+        #warning "Scene 04"
+
+        #local local_clock = global_clock - 1;
+
         object
         {
             minimon
             translate D2_top + <0, 1.3, 0>
         }
-    #end
-    
-    // camera settings
-    camera
-    {
-        right image_width/image_height * x
-        
-        #local position_camera = D2_top + <0, 15, 0>;
-        #local point_focus = D2_top - <0, 0, 1>;
-        
-        #if (local_clock < 1/4)
-        
-            location position_camera + 3/4*distance_edge
-            look_at point_focus + 3/4*distance_edge
-            
-        #end 
-        
-        #if (local_clock >= 1/4 & local_clock < 1/2)
-        
-            location position_camera + distance_edge*(1-local_clock)
-            look_at point_focus + distance_edge*(1-local_clock)
 
-        #end
-        
-        
-        #if (local_clock >= 1/2)
-            
-            #local another_local_clock = (local_clock - 1/2)*2;
-            
-            location D2_top - <0, 2*(1-another_local_clock), 3>
-            look_at D2_top + <0, 1, 0>
-    
-        #end       
-    }
-    
-#end 
+        camera
+        {
+            right image_width/image_height * x
+
+            #if (local_clock < 1/4)
+
+                #local another_local_clock = (local_clock - 1/4) * 4
+
+                location D2_top + <0,1+(3-another_local_clock),3>
+                look_at D2_top-<0,0,30>-another_local_clock*<0,0,100>
+
+            #end
+
+            #if (local_clock >= 1/4 & local_clock < 1/2)
 
 
-//--------------------------------------------------------------------------
-// scene 02 ----------------------------------------------------------------
- 
-#if (global_clock > 1 & time <= 2)
+            #end
 
-    #local local_clock = global_clock - 1;
+            #if (local_clock >= 1/2 & local_clock < 3/4)
 
-    object
-    {
-        minimon
-        translate D2_top + <0, 1.3, 0>
-    }
-    
-    camera
-    {
-        right image_width/image_height * x
-        
-        #if (local_clock < 1/4)
-        
-            #local another_local_clock = (local_clock - 1/4) * 4
-        
-            location D2_top + <0,1+(3-another_local_clock),3>
-            look_at D2_top-<0,0,30>-another_local_clock*<0,0,100>
-            
-        #end 
-        
-        #if (local_clock >= 1/4 & local_clock < 1/2)
-        
 
-        #end
-        
-        #if (local_clock >= 1/2 & local_clock < 3/4)
-        
+            #end
 
-        #end
-        
-        
-        #if (local_clock >= 1/2)
-            
-    
-        #end
-    }
-    
-    
 
+            #if (local_clock >= 1/2)
+
+
+            #end
+        }
+    #break // of scene 04.
+
+    //--------------------------------------------------------------------------
+    // scene 05 ----------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    #range (2,3)
+        #warning "Scene 05"
+    #break // of scene 05.
+
+    //--------------------------------------------------------------------------
+    // scene 06 ----------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    #range (3,4)
+        #warning "Scene 06\n"
+    #break // of scene 06.
+
+    //--------------------------------------------------------------------------
+    // scene 07 ----------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    #range (4,5)
+        #warning "Scene 07\n"
+    #break // of scene 07.
+
+    //--------------------------------------------------------------------------
+    // scene 08 ----------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    #range (5,6)
+        #warning "Scene 08\n"
+    #break // of scene 08.
+
+    //--------------------------------------------------------------------------
+    // scene 09 ----------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    #range (6,7)
+        #warning "Scene 09\n"
+    #break // of scene 09.
+
+    #else
+        #warning "Else!\n"
 #end
 
 //--------------------------------------------------------------------------

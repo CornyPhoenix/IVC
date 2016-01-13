@@ -19,7 +19,7 @@ global_settings{ assumed_gamma 1.0 }
 #include "math.inc"
 #include "transforms.inc"
 //-----
-#include "./Informatikum/Informatikum.inc"
+//#include "./Informatikum/Informatikum.inc"
 #include "./Minimon/Minimon.inc"
 //--------------------------------------------------------------------------
 // parameters and variables ------------------------------------------------
@@ -29,8 +29,9 @@ global_settings{ assumed_gamma 1.0 }
 #declare FRAMES_PER_SECOND = 24.5;
 #declare BPM = 140;
 
-#declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth+1>;
-#declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>;
+#declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth> + <0,0,1>;
+#declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>; 
+#declare offset_minimon = <0, 1.3, 0>;  
 //--------------------------------------------------------------------------
 // macros ------------------------------------------------------------------
 #macro  Jump(X)
@@ -40,27 +41,27 @@ global_settings{ assumed_gamma 1.0 }
 #end
 
 #macro HandsUp(X, d)
- (-180)*(d)*abs(sin(pi*X)) 
+ (-165)*(d)*abs(sin(0.5*pi*X)) 
 #end 
 
-#macro  Bounce(X)
- abs(sin(32*pi*X))
+#macro  Bounce(time, number)
+ abs(sin(number*pi*time))
 #end
 
-#macro Flap(X, d)
- (-180)*(d)*abs(sin(32*pi*X))
+#macro Flap(time, number)
+ -180*abs(sin(number*pi*time))
 #end
 
-#macro Paddle(X)
- 45*sin(32*pi*X)
+#macro Paddle(time, number)
+ 45*sin(number*pi*time)
 #end
 
-#macro Swing(X)
- -90*sin(32*pi*X)
+#macro Swing(time, number)
+ -90*sin(number*pi*time)
 #end
 
-#macro Totter(X)
- -5*sin(32*pi*X)
+#macro Totter(time, number)
+ -5*sin(number*pi*time)
 #end
 
 #macro Breathe(X)
@@ -150,11 +151,14 @@ box {
     #range (0,1)
         #warning "Scene 03"
         #local local_clock = global_clock;
-        #local distance_edge = <0, 0, 32>;
-
+        #local distance_edge = <0, 0, 24>;
+        
         //minimon
-        #if (local_clock < 1/2)
-
+        #if (local_clock <= 3/4)
+            
+            #local another_local_clock = 4/3 * local_clock;
+            #local n = 32;
+        
             merge
             {
                 object { upper_head }
@@ -162,107 +166,80 @@ box {
                 object
                 {
                     arm
-                    rotate <Swing(local_clock), 0, 0>
+                    rotate <Swing(local_clock, n), 0, 0>
                     translate offset_arm_right
                 }
                 object
                 {
                     arm
-                    rotate <Swing(local_clock), 180, 0>
+                    rotate <Swing(local_clock, n), 180, 0>
                     translate offset_arm_left
                 }
                 object
                 {
                     foot
-                    rotate <Paddle(local_clock), 0, 0>
+                    rotate <Paddle(local_clock, n), 0, 0>
                     translate offset_foot_right
-
+                    
                 }
                 object
                 {
                     foot
-                    rotate <Paddle(-local_clock), 0, 0>
+                    rotate <Paddle(-local_clock, n), 0, 0>
                     translate offset_foot_left
-
+                    
                 }
                 //rotate <0, 0, Totter(local_clock)>
-                translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + distance_edge*(1-local_clock)
-            }
-
+                translate D2_top + offset_minimon + <0, 0.5*Bounce(local_clock, n), 0> + distance_edge*(1-another_local_clock)
+            }    
+                
         #end
-
-        #if (local_clock >= 1/2 & local_clock <= 3/4)
-
-            merge
-            {
-                object { upper_head }
-                object { lower_head }
-                object
-                {
-                    arm
-                    rotate <Swing(local_clock), 0, 0>
-                    translate offset_arm_right
-                }
-                object
-                {
-                    arm
-                    rotate <Swing(local_clock), 180, 0>
-                    translate offset_arm_left
-                }
-                object
-                {
-                    foot
-                    rotate <Paddle(local_clock), 0, 0>
-                    translate offset_foot_right
-
-                }
-                object
-                {
-                    foot
-                    rotate <Paddle(-local_clock), 0, 0>
-                    translate offset_foot_left
-
-                }
-                //rotate <0, 0, Totter(local_clock)>
-                #local another_local_clock = (local_clock - 1/2) * 4;
-                translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + 1/4*distance_edge*(1-local_clock)
-            }
-        #end
-
+        
         #if (local_clock > 3/4)
-            // arrived at edge
+        
+            // minimon arrived at edge
             object
             {
                 minimon
-                translate D2_top + <0, 1.3, 0>
+                translate D2_top + offset_minimon
             }
-        #end
-
+        
+        #end   
+        
         // camera settings
         camera
         {
             right image_width/image_height * x
-
+            
             #local position_camera = D2_top + <0, 15, 0>;
             #local point_focus = D2_top - <0, 0, 1>;
-
-            #if (local_clock < .25)
-                location position_camera + 3/4*distance_edge
-                look_at point_focus + 3/4*distance_edge
+            
+            #if (local_clock < 1/4)
+            
+                location position_camera + 2/3*distance_edge
+                look_at point_focus + 2/3*distance_edge
+                
             #end
-
-            #if (local_clock >= .25 & local_clock < .5)
-                location position_camera + distance_edge*(1-local_clock)
-                look_at point_focus + distance_edge*(1-local_clock)
+            
+            #if (local_clock >= 1/4 & local_clock < 2/4)
+            
+                #local another_local_clock = (local_clock - 1/4)*4; 
+            
+                location position_camera + 2/3*distance_edge*(1-another_local_clock)
+                look_at point_focus + 2/3*distance_edge*(1-another_local_clock)
+    
             #end
-
-            #if (local_clock >= .5)
-                #local another_local_clock = (local_clock - .5) * 2;
-
-                location D2_top - <0, 2 * (1 - another_local_clock), 3>
+            
+            
+            #if (local_clock >= 2/4)
+                
+                #local another_local_clock = (local_clock - 1/2)*2;
+                
+                location D2_top - <0, 2*(1-another_local_clock), 3>
                 look_at D2_top + <0, 1, 0>
-            #end
-        }
+        
+            #end       
+        }        
 
     #break // of scene 03.
 
@@ -276,38 +253,40 @@ box {
         object
         {
             minimon
-            translate D2_top + <0, 1.3, 0>
+            translate D2_top + offset_minimon
         }
-
+        
         camera
         {
             right image_width/image_height * x
-
+            
             #if (local_clock < 1/4)
-
-                #local another_local_clock = (local_clock - 1/4) * 4
-
-                location D2_top + <0,1+(3-another_local_clock),3>
-                look_at D2_top-<0,0,30>-another_local_clock*<0,0,100>
-
-            #end
-
+            
+                #local another_local_clock = 4*local_clock;
+            
+                location D2_top + <0, 4-another_local_clock, 3>
+                look_at D2_top-<0,0,50>-another_local_clock*<0,0,100>
+                // look_at D2_top-<0,0,100>
+                
+            #end 
+            
             #if (local_clock >= 1/4 & local_clock < 1/2)
-
-
+            
+    
             #end
-
+            
             #if (local_clock >= 1/2 & local_clock < 3/4)
-
-
+            
+    
             #end
-
-
+            
+            
             #if (local_clock >= 1/2)
-
-
+                
+        
             #end
-        }
+        } 
+          
     #break // of scene 04.
 
     //--------------------------------------------------------------------------
@@ -315,6 +294,170 @@ box {
     //--------------------------------------------------------------------------
     #range (2,3)
         #warning "Scene 05"
+        
+
+        #local local_clock = global_clock - 2;
+        #local distance_jump = <0, 0, -25>;
+        
+        // jumping off roof
+            #if (local_clock < 1/4)
+            
+                #local another_local_clock = 4* local_clock;
+            
+                //todo: zoom on minimon's face or sth
+                
+            #end
+            
+            // pov of minimon while falling to the ground
+            #if (local_clock >= 1/4 & local_clock < 2/4)
+            
+                #local another_local_clock = (local_clock - 1/4) * 4;
+                
+                camera
+                {  
+                    right image_width/image_height * x
+                    location D2_top + offset_minimon + distance_jump*another_local_clock + <0, 0, -5>
+                    look_at D2_top + <0,5*Jump(another_local_clock),0>
+                    // look_at D2_top + <0,3-20*pow(another_local_clock, 2),0>
+                }
+                
+                // minimon
+                merge
+                {
+                    object { upper_head }
+                    object { lower_head }
+                    object
+                    {
+                        arm
+                        rotate <0, 0, HandsUp(another_local_clock, 1)> 
+                        translate offset_arm_right
+                        rotate <0,0,-5>
+                        
+                    }
+                    object
+                    {
+                        arm
+                        rotate <0, 180, 0>
+                        rotate <0, 0, HandsUp(another_local_clock, -1)>
+                        translate offset_arm_left
+                        rotate <0,0,5>
+                        
+                    }
+                    object
+                    {
+                        foot
+                        rotate <Paddle(another_local_clock, 8), 0, 0>
+                        translate offset_foot_right
+                    }
+                    object
+                    {
+                        foot
+                        rotate <Paddle(-another_local_clock, 8), 0, 0>
+                        translate offset_foot_left
+                    }
+                    
+                    translate D2_top + offset_minimon + distance_jump*another_local_clock + <0, 3*Jump(another_local_clock), 0>   
+                }
+                
+            #end
+            
+            // minimon finally landed in front of a minimon crowd
+            #if (local_clock >= 2/4 & local_clock < 3/4)
+            
+                #local another_local_clock = (local_clock - 2/4) * 4;
+                
+                #local height = <0, 10, 0>;
+                
+                camera
+                {  
+                    right image_width/image_height * x
+                    location D2_front + offset_minimon + distance_jump + <0, 0, -5*pow(another_local_clock,2)>
+                    look_at D2_front + offset_minimon + height*(1-another_local_clock) + distance_jump 
+                }
+                
+                // leading minimon
+                merge
+                {
+                    object { upper_head }
+                    object { lower_head }
+                    object
+                    {
+                        arm
+                        rotate <0, 0, HandsUp(another_local_clock, -1)> 
+                        translate offset_arm_right
+                        rotate <0,0,-5>
+                        
+                    }
+                    object
+                    {
+                        arm
+                        rotate <0, 180, 0>
+                        rotate <0, 0, HandsUp(another_local_clock, 1)>
+                        translate offset_arm_left
+                        rotate <0,0,5>
+                        
+                    }
+                    object
+                    {
+                        foot
+                        rotate <Paddle(another_local_clock, 8), 0, 0>
+                        translate offset_foot_right
+                    }
+                    object
+                    {
+                        foot
+                        rotate <Paddle(-another_local_clock, 8), 0, 0>
+                        translate offset_foot_left
+                    }
+                    
+                    translate D2_front + offset_minimon + height*(1-another_local_clock) + distance_jump   
+                }
+                
+                //todo: army of minimons in the background
+                
+                  
+            #end    
+    
+            
+            // all the minimon's start marching
+            #if (local_clock > 3/4)
+            
+                #local another_local_clock = (local_clock - 3/4) * 4;
+            
+                camera
+                {
+                    right image_width/image_height * x
+                    
+                    location D2_front + <0, 5, ((-8)*another_local_clock)-40>
+                    look_at D2_front + <0, 1, 0> //rotate <0,360*clock, 0>
+                }
+                
+                #local Dx = 4.00;
+                #local Dz = 4.00;
+                #local NrX = -3;
+                #local EndNrX = 4;
+                #while (NrX < EndNrX)
+                    #local NrZ = 0;
+                    #local EndNrZ = 7;
+                    #while (NrZ < EndNrZ)
+                        object
+                        {
+                            minimon
+                            translate D2_front - <NrX*Dx, 0, NrZ*Dz>
+                        }
+                        #local NrZ = NrZ + 1;
+                    #end
+                    #local NrX = NrX + 1;
+                #end
+                
+                object
+                { 
+                    minimon
+                    translate D2_front - <0, 0, 8*Dz>
+                }
+                
+            #end
+    
     #break // of scene 05.
 
     //--------------------------------------------------------------------------
@@ -348,91 +491,3 @@ box {
     #else
         #warning "Else!\n"
 #end
-
-//--------------------------------------------------------------------------
-// scene 03 ----------------------------------------------------------------
-
-/*
-#if (global_clock >= 2 & time < 3)
-    #local local_time = global_clock - 2;
-    
-    camera
-    {  
-        right x*image_width/image_height
-        location D2_roof_front_center+<0,1.3,-10>
-        look_at D2_roof_front_center+<0,3-20*local_time*local_time,0>
-    }
-    
-    // minimon
-    merge
-    {
-        object { upper_head }
-        object { lower_head }
-        object
-        {
-            arm
-            rotate <0, 0, HandsUp(local_time, 1)> 
-            translate offset_arm_right
-            rotate <0,0,-5>
-            
-        }
-        object
-        {
-            arm
-            rotate <0, 180, 0>
-            rotate <0, 0, HandsUp(local_time, -1)>
-            translate offset_arm_left
-            rotate <0,0,5>
-            
-        }
-        object
-        {
-            foot
-            rotate <Paddle(local_time), 0, 0>
-            translate offset_foot_right
-        }
-        object
-        {
-            foot
-            rotate <Paddle(-local_time), 0, 0>
-            translate offset_foot_left
-        }
-        translate D2_roof_front_center + <0,1.3+3*Jump(local_time),1-3*local_time>
-    }
-#end */
-
-//--------------------------------------------------------------------------
-// scene 04 ----------------------------------------------------------------
-
-/*
-#if (global_clock >= 3 & global_clock < 4)
-    #local local_time = global_clock - 3;
-    
-    camera
-    {
-        // perspective angle 100 // front view
-        location D2_building_front + <0, 5, ((-8)*time)-40>
-        right x*image_width/image_height
-        look_at D2_building_front + <0, 1, 0> //rotate <0,360*clock, 0>
-    }
-
-    #declare Dx = 4.00; // distance in x
-    #declare Dz = 4.00;
-    #declare NrX = -3;      // startX
-    #declare EndNrX = 4;   // endX
-    #while (NrX < EndNrX) // <-- loop X
-     #declare NrZ = 0;     // startZ
-     #declare EndNrZ = 7;  // endZ
-     #while (NrZ < EndNrZ) // <- loop Z
-      object{ walking_minimon
-              translate D2_building_front - <NrX*Dx, 0, NrZ*Dz>}
-     #declare NrZ = NrZ + 1;  // next NrZ
-     #end // --------------- end of loop Z
-    #declare NrX = NrX + 1;// next NrX
-    #end //
-    
-    object{ walking_minimon
-              translate D2_building_front - <0, 0, 8*Dz> }  
-#end
-*/
-

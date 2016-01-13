@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------
-// author:  Sibel Toprak, Konstantin Möllers
+// author:  Sibel Toprak, Konstantin Mï¿½llers
 // date:    2016-01-01
 //--------------------------------------------------------------------------
 #version 3.7;
@@ -19,12 +19,15 @@ global_settings{ assumed_gamma 1.0 }
 #include "math.inc"
 #include "transforms.inc"
 //-----
-#include "inc/informatikum.inc"
-#include "inc/minimon.inc"
+#include "./Informatikum/Informatikum.inc"
+#include "./Minimon/Minimon.inc"
 //--------------------------------------------------------------------------
 // parameters and variables ------------------------------------------------
 
 #declare global_clock = clock;
+
+#declare FRAMES_PER_SECOND = 24.5;
+#declare BPM = 140;
 
 #declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth> + 1*z; 
 #declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>;
@@ -88,7 +91,7 @@ sky_sphere
     {   
         image_map
         {
-            jpeg "img/sky.jpg"
+            jpeg "./Textures/sky.jpg"
             map_type 1
         }
 	}
@@ -118,15 +121,15 @@ box {
 	/*texture{ pigment{ color rgb<.24,0.45,0.23>*0.67 }
 	         normal { bumps 0.75 scale .000017647 }
                }*/
-	texture {
-		pigment { 
-			image_map { 
-				png "img/texture.png"
-				map_type 0 
-				interpolate 2 			
-		  }		  
-		}
-	}
+//	texture {
+//		pigment {
+//			image_map {
+//				png "./Textures/texture.png"
+//				map_type 0
+//				interpolate 2
+//		    }
+//		}
+//	}
 	scale <1800, 1800, 1>
 	rotate -90*x
 	rotate 180*y
@@ -202,7 +205,7 @@ Haus(R_x, R_z, R_width, R_depth, R_levels, R_color)
     #end
     
     #if (local_clock >= 1/2 & local_clock <= 3/4)
-        
+
         merge
         {
             object { upper_head }
@@ -237,19 +240,16 @@ Haus(R_x, R_z, R_width, R_depth, R_levels, R_color)
             #local another_local_clock = (local_clock - 1/2) * 4;
             translate D2_top + <0, 0.5*Bounce(local_clock) + 1.3, 0> + 1/4*distance_edge*(1-local_clock)
         }
-        
     #end
     
     #if (local_clock > 3/4)
-    
         // arrived at edge
         object
         {
             minimon
             translate D2_top + <0, 1.3, 0>
         }
-    
-    #end   
+    #end
     
     // camera settings
     camera

@@ -33,7 +33,7 @@ sky_sphere
     {   
         image_map
         {
-            png "img/stars.png"
+            png "Textures/stars.png"
             map_type 1
         }
         scale 1000000
@@ -48,7 +48,7 @@ sphere
     {
         image_map
         {
-            jpeg "img/earth.jpg"
+            jpeg "Textures/earth.jpg"
             map_type 1
         }
     }

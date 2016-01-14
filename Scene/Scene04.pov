@@ -13,7 +13,7 @@ camera {
     #if (local_clock < .25)
         #local another_local_clock = 4*local_clock;
 
-        location D2_top + <0, 4-another_local_clock, 3>
+        location D2_top + <0, 30-another_local_clock, -5>
         look_at D2_top-<0,0,50>-another_local_clock*<0,0,100>
         // look_at D2_top-<0,0,100>
     #else

@@ -84,26 +84,24 @@ light_source{<1500,2500,-2500> color White}
                        }
                 finish {ambient 1 diffuse 0} }      
        scale 10000}*/
-//--------------------------------------------------------------------------
-// sky ---------------------------------------------------------------------
-sky_sphere
-{
-    pigment
-    {   
-        image_map
-        {
+sky_sphere {
+    pigment {
+        image_map {
             jpeg "./Textures/sky.jpg"
             map_type 1
         }
 	}
 }
+
 // fog ---------------------------------------------------------------------
-fog{fog_type   2
+fog {
+    fog_type   2
     distance   50
     color      White
     fog_offset 0.1
     fog_alt    2.0
-    turbulence 0.8}
+    turbulence 0.8
+}
 
 // ground ------------------------------------------------------------------
 plane { <0,-0.1,0>, 0 
@@ -122,15 +120,15 @@ box {
 	/*texture{ pigment{ color rgb<.24,0.45,0.23>*0.67 }
 	         normal { bumps 0.75 scale .000017647 }
                }*/
-//	texture {
-//		pigment {
-//			image_map {
-//				png "./Textures/texture.png"
-//				map_type 0
-//				interpolate 2
-//		    }
-//		}
-//	}
+	texture {
+		pigment {
+			image_map {
+				png "./Textures/texture.png"
+				map_type 0
+				interpolate 2
+		    }
+		}
+	}
 	scale <1800, 1800, 1>
 	rotate -90*x
 	rotate 180*y

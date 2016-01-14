@@ -385,29 +385,59 @@ difference {
     }
 #end
 
+
+// Zwischenboden
+#local x1 = C1_x;
+#local x2 = C1_x + C1_width;
+#local z1 = C1_z - C1_depth;
+#local z2 = C1_z;
+#for (level, 0, 1)
+    box {
+        <x1 + 2, level * level_height + 0.1, z1 + 2>
+        <x2 - 2, level * level_height + 0.5, z2 - 2>
+        texture { pigment { color Gray30 } }
+    }
+#end
+
+
 // Haus D ------------------------------------------------------------------
 #local window_width=39;
 
+#local x1 = D1_x;
+#local x2 = D1_x + D1_width;
+#local y2 = D1_levels * level_height + 15;
 difference {
     union {
         // Außenhülle D1
         box {
-            <D1_x,0,D1_z-D1_depth>
-            <D1_x+D1_width,D1_levels*level_height+15,D1_z>
+            <x1+1,0,D1_z-D1_depth>
+            <x2-1,y2,D1_z>
+            texture { Waende }
         }
         // Außenhülle D2
         box {
             <D2_x,0,D2_z-D2_depth>
             <D2_x+D2_width,D2_levels*level_height,D2_z>
+            texture { Waende }
         }
-        texture { Waende }
+        // Ziegelwand am Ende
+        box {
+            <x1,0,D1_z-D1_depth>
+            <x1+1,y2,D1_z>
+            texture { ZiegelZ }
+        }
+        box {
+            <x2-1,0,D1_z-D1_depth>
+            <x2,y2,D1_z>
+            texture { ZiegelZ }
+        }
     }
 
     union {
         // Innenraum D1
         box {
-            <D1_x+1,0,D1_z-D1_depth+1>
-            <D1_x+D1_width-1,D1_levels*level_height+13,D1_z-1>
+            <x1+1,0,D1_z-D1_depth+1>
+            <x2-1,D1_levels*level_height+13,D1_z-1>
         }
         // Innenraum D2
         box {
@@ -563,8 +593,8 @@ box {
 // Zwischenboden
 #for (level, 1, 1)
     box {
-        <D1_x, level * level_height + 14, D1_z-D1_depth>
-        <D1_x+D1_width, level * level_height + 15, D1_z>
+        <D1_x + 1, level * level_height + 14, D1_z-D1_depth + 1>
+        <D1_x+D1_width - 1, level * level_height + 15, D1_z - 1>
         texture { pigment { color Gray30 } }
     }
 #end
@@ -810,6 +840,19 @@ difference {
     #end
 #end
 
+// Zwischenboden
+#local x1 = G_x;
+#local x2 = G_x + G_width;
+#local z1 = G_z - G_depth;
+#local z2 = G_z;
+#for (level, 0, 1)
+    box {
+        <x1 + 2, level * level_height + 14, z1 + 2>
+        <x2 - 2, level * level_height + 15, z2 - 2>
+        texture { pigment { color Gray30 } }
+    }
+#end
+
 
 // Haus H ------------------------------------------------------------------
 #local x1 = H_x;
@@ -890,29 +933,6 @@ HausKasten(texture { Waende }, texture { Waende })
 
 Haus(B2_x, B2_z, B2_width, B2_depth, B2_levels, B2_color)
 //Haus(F2_x, F2_z, F2_width, F2_depth, F2_levels, F2_color)
-
-// Trauerweiden ------------------------------------------------------------
-//#include "Informatikum/weeping_willow.inc"
-//#declare TREE_SCALE = level_height*.4;
-//#declare HEIGHT = weeping_willow_13_height * 1.3 * TREE_SCALE;
-//#declare WIDTH = HEIGHT*400/600;
-////camera { orthographic location <1025, HEIGHT*0.45, 525-100>
-////         right <WIDTH, 0, 0> up <0, HEIGHT, 0>
-////         look_at <1025, HEIGHT*0.45, 525-80> }
-//#macro tree(pos_x, pos_z, p_size, p_rot)
-//union {
-//    object { weeping_willow_13_stems
-//        pigment {color BakersChoc} }
-//    object { weeping_willow_13_leaves
-//        texture { pigment {color DarkGreen}
-//                  finish { ambient 0.15 diffuse 0.8 }}}
-//    scale p_size rotate p_rot*y
-//    translate <pos_x, 0, pos_z>
-//}
-//#end
-//tree(1025,  525, 1.3 * TREE_SCALE, 100)
-//tree( 400,  600,       TREE_SCALE, 200)
-//tree(1040,  200,  .8 * TREE_SCALE, 300)
 
 
 // Gebüsche ----------------------------------------------------------------

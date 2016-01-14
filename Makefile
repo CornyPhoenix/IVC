@@ -19,4 +19,4 @@ scene08:
 scene09:
 	$(POVRAY) Campus.ini +SF2017 +EF2352    2>Logs/scene09 &
 Campus.mp4:
-	ffmpeg -framerate 1/24.5 -i Build/Campus%04d.png -c:v libx264 -r 30 -pix_fmt yuv420p Campus.mp4
+	ffmpeg -framerate 24.5 -i Build/Campus%04d.png -c:v libx264 -pix_fmt yuv420p Campus.mp4

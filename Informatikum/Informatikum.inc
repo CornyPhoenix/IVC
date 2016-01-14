@@ -21,8 +21,6 @@
                                   finish {reflection 0.2
                                          specular 0.1
                                          roughness 1
-                                         refraction 0.4
-                                         ior 1.2
                                          crand 0.02}
                                  scale 0.01
                          }
@@ -210,7 +208,7 @@
                             look_at   <40+D1_x+D1_width/2, 100.0 , D1_z>}
 
 #declare Camera_HausG = camera {angle 105
-                            location  <G_x - 150,       50,     G_z-G_depth/2>
+                            location  <G_x - 150,       150,     G_z-G_depth/2>
                             right     x*image_width/image_height
                             look_at   <G_x+G_width/2,   50.0,   G_z-G_depth/2>}
 

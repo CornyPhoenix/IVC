@@ -457,9 +457,21 @@ difference {
             }
         #end
 
+        box {
+            <D1_x+D1_width - 2, Bruecke_y1, Bruecke_z1>
+            <D1_x+D1_width + 2, Bruecke_y2, Bruecke_z2>
+        }
+
         // Schön hässlich damit authentisch
         texture { Innen }
     }
+}
+
+// Decke innen
+box {
+    <D1_x+D1_width - 1, D1_levels*level_height+12.9, D1_z-D1_depth+1>
+    <D1_x+1, D1_levels*level_height+13, D1_z-1>
+    texture { pigment { color Gray60 } }
 }
 
 // Fenster D1
@@ -798,6 +810,7 @@ difference {
     #end
 #end
 
+
 // Haus H ------------------------------------------------------------------
 #local x1 = H_x;
 #local x2 = H_x + H_width;
@@ -806,6 +819,65 @@ difference {
 #local z1 = H_z - H_depth;
 #local z2 = H_z;
 HausKasten(texture { Waende }, texture { Waende })
+
+
+// Brücke Haus D und F -----------------------------------------------------
+#local x1 = Bruecke_x1;
+#local x2 = Bruecke_x2;
+#local w = x2 - x1;
+#local y1 = Bruecke_y1;
+#local y2 = Bruecke_y2;
+#local z1 = Bruecke_z1;
+#local z2 = Bruecke_z2;
+difference {
+    box {
+        <x1, y1 - 1, z1 - 1>
+        <x2, y2 + 1, z2 + 1>
+        texture { Waende }
+    }
+    box {
+        <x1 - 2, y1, z1>
+        <x2 + 2, y2, z2>
+        texture { Innen }
+    }
+    #declare Bruecke_win = 10;
+    #declare Bruecke_fw = w/Bruecke_win;
+    #for (i, 0, Bruecke_win - 1)
+        #local xx1 = x1 + i * Bruecke_fw;
+        #local xx2 = xx1 + Bruecke_fw;
+        box {
+            <xx1 + 1, y1 + 13, z1 - 2>
+            <xx2 - 1, y2 -  1, z2 + 2>
+            texture { Innen }
+        }
+    #end
+}
+// Boden
+box {
+    <D1_x+D1_width - 1, y1, z1>
+    <x2, y1 + .1, z2>
+    texture { pigment { color Gray60 } }
+}
+box {
+    <D1_x+D1_width - 1, y2 - .1, z1>
+    <x2, y2, z2>
+    texture { pigment { color Gray60 } }
+}
+#for (i, 0, Bruecke_win - 1)
+    #local xx1 = x1 + i * Bruecke_fw;
+    #local xx2 = xx1 + Bruecke_fw;
+    box {
+        <xx1 + 1, y1 + 13, z1 - .1>
+        <xx2 - 1, y2 -  1, z1>
+        texture { Fenster }
+    }
+    box {
+        <xx1 + 1, y1 + 13, z2>
+        <xx2 - 1, y2 -  1, z2 + .1>
+        texture { Fenster }
+    }
+#end
+
 
 // Haus R ------------------------------------------------------------------
 #local x1 = R_x;

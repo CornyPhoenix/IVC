@@ -172,6 +172,13 @@
 #declare R_color   = <237, 30, 121> / 255;
 #declare R_levels  = 2;
 
+#declare Bruecke_x1 = 1130;
+#declare Bruecke_x2 = 1250;
+#declare Bruecke_y1 = level_height + 15;
+#declare Bruecke_y2 = 2 * level_height + 15;
+#declare Bruecke_z1 = 935;
+#declare Bruecke_z2 = 975;
+
 // Kameras
 #declare Camera_SO = camera {angle 100 
                             location  <2000, 500.0, -200>
@@ -206,6 +213,11 @@
                             location  <G_x - 150,       50,     G_z-G_depth/2>
                             right     x*image_width/image_height
                             look_at   <G_x+G_width/2,   50.0,   G_z-G_depth/2>}
+
+#declare Camera_Bruecke = camera {angle 105
+                            location  <1190,       level_height*1.5 + 10,     955>
+                            right     x*image_width/image_height
+                            look_at   <1000,   level_height*1.5 + 10,   955>}
 
 #macro Haus(px, pz, pwidth, pdepth, plevels, pcolor)
 	box {

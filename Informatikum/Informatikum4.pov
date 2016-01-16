@@ -552,8 +552,8 @@ box {
         texture { Fenster }
     }
     box {
-        <D2_x+D2_width-47,y1,D2_z>
-        <D2_x+D2_width-6,y2,D2_z+0.1>
+        <D2_x+D2_width-47,y1,D1_z>
+        <D2_x+D2_width-6,y2,D1_z+0.1>
         texture { Fenster }
     }
 #end

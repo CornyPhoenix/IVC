@@ -42,29 +42,40 @@ global_settings{ assumed_gamma 1.0 }
 
 // In front of building D
 #declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>;
+
+// Point in scene where all minimons assemble
+#declare distance_jump = scale_minimon * <0, 0, -25>;
  
 //--------------------------------------------------------------------------
 // macros ------------------------------------------------------------------
-#macro  Jump(X)
- #if (X<0.5) abs(sin(2*pi*X))
- #else -20*(X-0.5)
+#macro  Jump(time)
+ #if (time<0.5) abs(sin(2*pi*time))
+ #else -20*(time-0.5)
  #end
 #end
 
-#macro HandsUp(X, d)
- (-165)*(d)*abs(sin(0.5*pi*X)) 
+#macro HandsUp(time, d)
+ (-165)*(d)*abs(sin(0.5*pi*time)) 
+#end
+
+#macro HandsDown(time, d)
+ (-165)*(d)*(1-time) 
 #end 
 
 #macro  Bounce(time, number)
  abs(sin(number*pi*time))
 #end
 
-#macro Flap(time, number)
- -180*abs(sin(number*pi*time))
+#macro Flap(time, number, d)
+ -180*(d)*abs(sin(number*pi*time))
 #end
 
-#macro Paddle(time, number)
- 45*sin(number*pi*time)
+#macro Paddle(time, number, d)
+ 45*(d)*sin(number*pi*time)
+#end
+
+#macro FeetUp(time, number)
+ 45*abs(sin(number*pi*time))
 #end
 
 #macro Swing(time, number)
@@ -73,10 +84,6 @@ global_settings{ assumed_gamma 1.0 }
 
 #macro Totter(time, number)
  -5*sin(number*pi*time)
-#end
-
-#macro Breathe(X)
- abs(sin(2*pi*X))
 #end
 
 #declare CAM_RIGHT = x * image_width / image_height;

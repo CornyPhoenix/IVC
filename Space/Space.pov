@@ -127,7 +127,7 @@ union
     object
     {
         light_balls
-        translate position_camera + <0, 0, 10*(-p1+n*local_clock)>
+        translate position_camera + <0, 0, 20*(-p1+n*local_clock)>
     }
 
     // camera directed to where lights come from

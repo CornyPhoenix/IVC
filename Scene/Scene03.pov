@@ -21,8 +21,12 @@ camera {
     // and looking to the ground.
     // minimon appears in the camera's field of view
     #if (local_clock < 1/4)
+        location D2_top + 1/3*distance_edge + 1*y
+        look_at D2_top + 2/3*distance_edge 
+        /*
         location position_camera + 2/3*distance_edge
         look_at point_focus + 2/3*distance_edge
+        */
     #end
     
     // once the minimon is in the center of the field of view,
@@ -69,13 +73,13 @@ camera {
         }
         object {
             foot
-            rotate <Paddle(another_local_clock, stepcount_minimon), 0, 0>
+            rotate <Paddle(another_local_clock, stepcount_minimon, 1), 0, 0>
             translate offset_foot_right
 
         }
         object {
             foot
-            rotate <Paddle(-another_local_clock, stepcount_minimon), 0, 0>
+            rotate <Paddle(another_local_clock, stepcount_minimon, -1), 0, 0>
             translate offset_foot_left
 
         }

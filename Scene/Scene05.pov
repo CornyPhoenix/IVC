@@ -1,22 +1,57 @@
-#local local_clock = global_clock - 2;
-#local distance_jump = <0, 0, -25>;
+#local local_clock = global_clock - 2;     
 
-// jumping off roof
+#local distance_jump = scale_minimon * <0, 0, -25>;
+
+//--------------------------------------------------------------------------
+// sub-scene 01 ------------------------------------------------------------
+//--------------------------------------------------------------------------
+// zoom at eyes of the minimon standing on top of building D
 #if (local_clock < 1/4)
+
+    // second-level local clock
     #local another_local_clock = 4* local_clock;
-
-    //todo: zoom on minimon's face or sth
-#end
-
-// pov of minimon while falling to the ground
-#if (local_clock >= 1/4 & local_clock < 2/4)
-    #local another_local_clock = (local_clock - 1/4) * 4;
-
+    
+    // camera settings
     camera {
         right image_width/image_height * x
-        location D2_top + offset_minimon + distance_jump*another_local_clock + <0, 0, -5>
-        look_at D2_top + <0,5*Jump(another_local_clock),0>
-        // look_at D2_top + <0,3-20*pow(another_local_clock, 2),0>
+        
+        location D2_top + scale_minimon*<-(1+(1-another_local_clock))*sin(pi*another_local_clock), 1, (5+5*(1-another_local_clock))*cos(pi*another_local_clock)>
+        look_at D2_top + scale_minimon*<0, (0.5+0.5*another_local_clock)*sin(2.5*pi*another_local_clock), 1>
+    
+    }
+    
+    // minimon arrived at edge
+    object {
+        minimon
+        scale scale_minimon
+        translate D2_top + offset_minimon
+    }
+
+#end
+
+//--------------------------------------------------------------------------
+// sub-scene 02 ------------------------------------------------------------
+//--------------------------------------------------------------------------
+// minimon jumping off from roof of building D
+#if (local_clock >= 1/4 & local_clock < 2/4)
+    #local another_local_clock = (local_clock - 1/4) * 4;
+    
+    // following the minimon until a specific point in time
+    #local time_switch = 0.5;
+    
+    // camera moving with minimon as it jumps off from roof
+    camera {
+        right image_width/image_height * x
+        
+        location D2_top + offset_minimon + another_local_clock*distance_jump + scale_minimon*<0, 0, -5>
+        
+        
+        #if (another_local_clock < time_switch)
+            look_at D2_top + scale_minimon*<0, 5*Jump(another_local_clock), 0>
+        #else
+            look_at D2_top + scale_minimon*<0, 5*Jump(time_switch), 0>
+        #end
+        
     }
 
     // minimon
@@ -49,17 +84,22 @@
             rotate <Paddle(-another_local_clock, 8), 0, 0>
             translate offset_foot_left
         }
-
-        translate D2_top + offset_minimon + distance_jump*another_local_clock + <0, 3*Jump(another_local_clock), 0>
+        scale scale_minimon
+        translate D2_top + offset_minimon + distance_jump*another_local_clock + <0,  scale_minimon * 3*Jump(another_local_clock), 0>
     }
 
 #end
 
-// minimon finally landed in front of a minimon crowd
+
+//--------------------------------------------------------------------------
+// sub-scene 03 ------------------------------------------------------------
+//--------------------------------------------------------------------------
+// camera positioned on the ground and looking up to the sky.
+// camera following minimon while it lands to the ground in front of a minimon crowd.
 #if (local_clock >= 2/4 & local_clock < 3/4)
-
     #local another_local_clock = (local_clock - 2/4) * 4;
-
+    
+    // initial elevation of minimon from the ground
     #local height = <0, 10, 0>;
 
     camera {
@@ -97,7 +137,8 @@
             rotate <Paddle(-another_local_clock, 8), 0, 0>
             translate offset_foot_left
         }
-
+        
+        scale scale_minimon
         translate D2_front + offset_minimon + height*(1-another_local_clock) + distance_jump
     }
 
@@ -106,8 +147,10 @@
 
 #end
 
-
-// all the minimon's start marching
+//--------------------------------------------------------------------------
+// sub-scene 04 ------------------------------------------------------------
+//--------------------------------------------------------------------------
+// minimon finally landed in front of a minimon crowd
 #if (local_clock > 3/4)
     #local another_local_clock = (local_clock - 3/4) * 4;
 

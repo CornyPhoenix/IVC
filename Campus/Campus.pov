@@ -28,10 +28,21 @@ global_settings{ assumed_gamma 1.0 }
 
 #declare FRAMES_PER_SECOND = 24.5;
 #declare BPM = 140;
+ 
+// factor by which the minimon is scaled
+#declare scale_minimon = 5;
 
-#declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth> + <0,0,1>;
-#declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>; 
-#declare offset_minimon = <0, 1.3, 0>;  
+// The offset by which the minimon has to be translated along the y-axis
+// to make it stand on top of the ground
+#declare offset_minimon = scale_minimon * <0, 1.3, 0>;
+
+// On top of building D
+// Standing at the edge of the roof where you can see building A from
+#declare D2_top = <D2_x+0.5*D2_width, level_height*D2_levels, D2_z-D2_depth> + scale_minimon * <0,0,1>; 
+
+// In front of building D
+#declare D2_front = <D2_x+0.5*D2_width, 0, D2_z-D2_depth>;
+ 
 //--------------------------------------------------------------------------
 // macros ------------------------------------------------------------------
 #macro  Jump(X)

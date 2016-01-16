@@ -9,13 +9,15 @@
 
 camera {
     right image_width/image_height * x
-
-    #if (local_clock < .25)
+    
+    // camera positioned behind minimon to view building A
+    // pitching up the camera slightly
+    #if (local_clock < .25) 
         #local another_local_clock = 4*local_clock;
-
-        location D2_top + <0, 30-another_local_clock, -5>
-        look_at D2_top-<0,0,50>-another_local_clock*<0,0,100>
-        // look_at D2_top-<0,0,100>
+        
+        location D2_top + <0, scale_minimon*(3+another_local_clock), scale_minimon*3>
+        look_at D2_top-<0,0,50>-(1-another_local_clock)*<0,0,100>
+        
     #else
         #local CAMERA_ANGLE = CAMERA_START_ANGLE + CAMERA_ROT_ANGLE * 4 * pi * (local_clock - .25) / 540;
 
@@ -27,6 +29,6 @@ camera {
 
 object {
     minimon
-    scale 10
-    translate D2_top + offset_minimon + 11*y
+    scale scale_minimon
+    translate D2_top + offset_minimon
 }

@@ -88,6 +88,42 @@ global_settings{ assumed_gamma 1.0 }
 
 #declare CAM_RIGHT = x * image_width / image_height;
 
+// macro for creating a walking minimon
+// number_steps = number of steps the minimon is supposed to walk
+// time = some clock variable (can be global or local)
+#macro MinimonWalking(number_steps, time)
+    merge
+    {
+        object { upper_head }
+        object { lower_head }
+        object {
+            arm
+            rotate <Swing(time, number_steps), 0, 0>
+            translate offset_arm_right
+        }
+        object {
+            arm
+            rotate <Swing(time, number_steps), 180, 0>
+            translate offset_arm_left
+        }
+        object {
+            foot
+            rotate <Paddle(time, number_steps, 1), 0, 0>
+            translate offset_foot_right
+
+        }
+        object {
+            foot
+            rotate <Paddle(time, number_steps, -1), 0, 0>
+            translate offset_foot_left
+
+        }
+        scale scale_minimon
+        translate offset_minimon + <0, scale_minimon/2 *Bounce(time, number_steps), 0>
+    } 
+#end
+ 
+
 //--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------

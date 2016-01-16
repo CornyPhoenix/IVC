@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
-<project xmlns="http://audacity.sourceforge.net/xml/" projname="Soundtrack_data" version="1.3.0" audacityversion="2.1.0" sel0="87.0098204294" sel1="87.0098204294" vpos="0" h="22.3675630924" zoom="8.9415194303" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Soundtrack_data" version="1.3.0" audacityversion="2.1.0" sel0="110.6820000000" sel1="110.6820000000" vpos="0" h="22.3675630924" zoom="8.9415194303" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
 	<tags/>
 	<wavetrack name="Scott Pilgrim vs. the World (Robotaki Remix)" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
 		<waveclip offset="0.00000000">
@@ -148,13 +148,15 @@
 			<envelope numpoints="0"/>
 		</waveclip>
 	</wavetrack>
-	<labeltrack name="Textspur" numlabels="7" height="110" minimized="0" isSelected="1">
+	<labeltrack name="Textspur" numlabels="9" height="110" minimized="0" isSelected="1">
 		<label t="14.89600000" t1="14.89600000" title="Eintreffen Roboter, Schwenk richtung Erde"/>
 		<label t="28.62200000" t1="28.62200000" title="Google Earth"/>
 		<label t="42.11100000" t1="42.11100000" title="Szene 1: auf Haus D"/>
 		<label t="55.82500000" t1="55.82500000" title="Szene 2: Flug über Campus"/>
 		<label t="69.53900000" t1="69.53900000" title="Szene 3"/>
 		<label t="83.25400000" t1="83.25400000" title="Szene 4"/>
+		<label t="96.96800000" t1="96.96800000" title="Szene 5"/>
+		<label t="110.68200000" t1="110.68200000" title="110,6824"/>
 		<label t="119.66646254" t1="119.66646254" title="Ende der Szene, Zerstörung Informatikum"/>
 	</labeltrack>
 	<wavetrack name="RPG_Plus_Shrapnel-Mike_Koenig-802194222" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">

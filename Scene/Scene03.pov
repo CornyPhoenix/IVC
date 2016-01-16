@@ -1,7 +1,9 @@
+#include "Informatikum/Informatikum4.pov"
 #local local_clock = global_clock;           
 // initial distance of the minimon with respect to the roof top edge
 #local stepcount_minimon = 24;
 #local distance_edge = scale_minimon * <0, 0, stepcount_minimon>;
+
 
 //--------------------------------------------------------------------------
 // camera settings ---------------------------------------------------------

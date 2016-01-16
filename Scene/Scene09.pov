@@ -26,6 +26,7 @@ camera { Camera_SO }
 difference {
     union {
         #include "Informatikum/Informatikum4.pov"
+        #include "Informatikum/Baeume.pov"
     }
 
     sphere {

@@ -1,3 +1,5 @@
+#include "Informatikum/Informatikum4.pov"
+
 #local local_clock = global_clock - 2;
 #local distance_jump = <0, 0, -25>;
 

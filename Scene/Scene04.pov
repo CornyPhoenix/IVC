@@ -1,3 +1,5 @@
+#include "Informatikum/Informatikum4.pov"
+
 #declare CAMERA_ROT_ANGLE = 160;
 #declare CAMERA_START_ANGLE = (180 + (180 - CAMERA_ROT_ANGLE)/2) * pi/180;
 #declare CAMERA_LOOK_AT = <760, level_height, 825>;

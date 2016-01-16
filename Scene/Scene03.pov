@@ -1,3 +1,5 @@
+#include "Informatikum/Informatikum4.pov"
+
 #local local_clock = global_clock;
 #local distance_edge = <0, 0, 24>;
 

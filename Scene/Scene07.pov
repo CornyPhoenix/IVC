@@ -4,7 +4,7 @@
 
 #declare CAM_START = <
     (Bruecke_x1 + Bruecke_x2) / 2,
-    (Bruecke_y1 + Bruecke_y2) / 2 + 10, // Augenhöhe
+    (Bruecke_y1 + Bruecke_y2) / 2, // Augenhöhe
     (Bruecke_z1 + Bruecke_z2) / 2
 >;
 
@@ -16,7 +16,7 @@
     #declare CAM_ANGLE_Y = 180 * pow(sin(2 * pi * (local_clock - 0.25)), 2);
 #end
 
-#declare CAM_ANGLE_Z = 0;
+#declare CAM_ANGLE_Z = -10;
 
 #declare CAM_LOCATION = CAM_START + local_clock * CAM_MOVE;
 #declare CAM_LOOK_AT = vrotate(-x, <0, CAM_ANGLE_Y, CAM_ANGLE_Z>);
@@ -31,8 +31,8 @@ camera {
 
 // Minimon
 object {
-    minimon
+    MinimonWalking(32, local_clock)
+    scale 1.3
     rotate <0,90,0>
-    scale 5
-    translate CAM_LOCATION + <20,0,0>
+    translate CAM_LOCATION + <30,-14,0>
 }

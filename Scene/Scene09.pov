@@ -1,14 +1,21 @@
 #local local_clock = global_clock - 6;
 
+#declare Rnd_1 = seed(int(1153*local_clock));
 #include "Informatikum/Informatikum.inc"
-camera { Camera_SO }
+
+#declare shake = function(xx) { 1.5 * (1 - pow(xx - .573134328, 2)/.328482958) }
+
+camera {
+    Camera_SO
+    rotate <shake(local_clock) * SRand(Rnd_1), shake(local_clock) * SRand(Rnd_1), shake(local_clock) * SRand(Rnd_1)>
+}
 
 #declare Container_T = texture {
    pigment {rgbt <1,1,1,1>}
    finish {ambient 0 diffuse 0}
 }
 
-#declare Scale = local_clock * 1290;
+#declare Scale = (pow(2, local_clock) - 1) * 3225;
 #declare INTERIOR = interior { media
                                   { emission <1,0.5,0>/Scale
                                     density
@@ -23,6 +30,7 @@ camera { Camera_SO }
                                   }
                                 } // end of interior
 
+#if (local_clock < 0.5)
 difference {
     union {
         #include "Informatikum/Informatikum4.pov"
@@ -35,6 +43,7 @@ difference {
         translate <900, 300, 900>
     }
 }
+#end
 
 sphere {
     0 1

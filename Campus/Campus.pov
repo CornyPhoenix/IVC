@@ -18,6 +18,7 @@ global_settings{ assumed_gamma 1.0 }
 #include "functions.inc"
 #include "math.inc"
 #include "transforms.inc"
+#include "rand.inc"
 //-----
 #include "./Informatikum/Informatikum.inc"
 #include "./Minimon/Minimon.inc"

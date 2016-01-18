@@ -1,10 +1,17 @@
 <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
-<project xmlns="http://audacity.sourceforge.net/xml/" projname="Soundtrack_data" version="1.3.0" audacityversion="2.1.0" sel0="110.6820000000" sel1="110.6820000000" vpos="0" h="22.3675630924" zoom="8.9415194303" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
-	<tags/>
-	<wavetrack name="Scott Pilgrim vs. the World (Robotaki Remix)" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Soundtrack_data" version="1.3.0" audacityversion="2.1.0" sel0="113.0680314326" sel1="113.0680314326" vpos="0" h="10.7364302844" zoom="8.9415194303" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds">
+	<tags>
+		<tag name="GENRE" value="Soundtrack"/>
+		<tag name="TRACKNUMBER" value="1"/>
+		<tag name="ALBUM" value="Soundtrack Battle Informatikum"/>
+		<tag name="YEAR" value="2016"/>
+		<tag name="TITLE" value="Destroy All Humans!"/>
+		<tag name="ARTIST" value="Sibel Toprak, Konstantin Möllers"/>
+	</tags>
+	<wavetrack name="Scott Pilgrim vs. the World (Robotaki Remix)" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
 		<waveclip offset="0.00000000">
-			<sequence maxsamples="262144" sampleformat="262159" numsamples="5484437">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="3066670">
 				<waveblock start="0">
 					<simpleblockfile filename="e0000cf8.au" len="164573" min="-0.822578" max="0.805156" rms="0.174961"/>
 				</waveblock>
@@ -39,45 +46,51 @@
 					<simpleblockfile filename="e0000dd6.au" len="262144" min="-0.872837" max="0.860575" rms="0.264427"/>
 				</waveblock>
 				<waveblock start="2688442">
-					<simpleblockfile filename="e0000c7c.au" len="262144" min="-1.010092" max="0.885926" rms="0.245371"/>
+					<simpleblockfile filename="e00001e0.au" len="189114" min="-1.010092" max="0.885926" rms="0.238465"/>
 				</waveblock>
-				<waveblock start="2950586">
-					<simpleblockfile filename="e000046b.au" len="262144" min="-0.966244" max="0.880808" rms="0.275531"/>
+				<waveblock start="2877556">
+					<simpleblockfile filename="e0000a8e.au" len="189114" min="-0.901228" max="0.862575" rms="0.262865"/>
 				</waveblock>
-				<waveblock start="3212730">
-					<simpleblockfile filename="e0000954.au" len="262144" min="-0.959938" max="0.938229" rms="0.257283"/>
+			</sequence>
+			<envelope numpoints="1">
+				<controlpoint t="69.538979591837" val="1.000000000000"/>
+			</envelope>
+		</waveclip>
+		<waveclip offset="69.53900227">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1812936">
+				<waveblock start="0">
+					<simpleblockfile filename="e00004e1.au" len="163830" min="-0.90947" max="0.878278" rms="0.247652"/>
 				</waveblock>
-				<waveblock start="3474874">
-					<simpleblockfile filename="e0000aaa.au" len="262144" min="-0.90267" max="0.90059" rms="0.261743"/>
+				<waveblock start="163830">
+					<simpleblockfile filename="e00003ea.au" len="163831" min="-0.929469" max="0.89208" rms="0.247393"/>
 				</waveblock>
-				<waveblock start="3737018">
-					<simpleblockfile filename="e0000233.au" len="262144" min="-0.929469" max="0.89208" rms="0.27443"/>
-				</waveblock>
-				<waveblock start="3999162">
+				<waveblock start="327661">
 					<simpleblockfile filename="e0000893.au" len="262144" min="-1.008765" max="0.859165" rms="0.277933"/>
 				</waveblock>
-				<waveblock start="4261306">
+				<waveblock start="589805">
 					<simpleblockfile filename="e0000c07.au" len="262144" min="-0.835375" max="0.862037" rms="0.292169"/>
 				</waveblock>
-				<waveblock start="4523450">
+				<waveblock start="851949">
 					<simpleblockfile filename="e00004f0.au" len="262144" min="-0.826535" max="0.847327" rms="0.26686"/>
 				</waveblock>
-				<waveblock start="4785594">
+				<waveblock start="1114093">
 					<simpleblockfile filename="e0000876.au" len="262144" min="-0.852118" max="0.887231" rms="0.300249"/>
 				</waveblock>
-				<waveblock start="5047738">
+				<waveblock start="1376237">
 					<simpleblockfile filename="e0000bb6.au" len="262144" min="-0.816601" max="0.867701" rms="0.301769"/>
 				</waveblock>
-				<waveblock start="5309882">
+				<waveblock start="1638381">
 					<simpleblockfile filename="e00006e3.au" len="174555" min="-0.843597" max="0.885265" rms="0.28895"/>
 				</waveblock>
 			</sequence>
-			<envelope numpoints="0"/>
+			<envelope numpoints="1">
+				<controlpoint t="0.000000000000" val="1.013888835907"/>
+			</envelope>
 		</waveclip>
 	</wavetrack>
-	<wavetrack name="Scott Pilgrim vs. the World (Robotaki Remix)" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+	<wavetrack name="Scott Pilgrim vs. the World (Robotaki Remix)" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
 		<waveclip offset="0.00000000">
-			<sequence maxsamples="262144" sampleformat="262159" numsamples="5484437">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="3066670">
 				<waveblock start="0">
 					<simpleblockfile filename="e0000f16.au" len="164573" min="-0.819308" max="0.845825" rms="0.172981"/>
 				</waveblock>
@@ -112,43 +125,49 @@
 					<simpleblockfile filename="e0000d8c.au" len="262144" min="-0.842863" max="0.853573" rms="0.266295"/>
 				</waveblock>
 				<waveblock start="2688442">
-					<simpleblockfile filename="e0000da5.au" len="262144" min="-0.858076" max="0.890129" rms="0.240637"/>
+					<simpleblockfile filename="e0000d2e.au" len="189114" min="-0.858076" max="0.846875" rms="0.232626"/>
 				</waveblock>
-				<waveblock start="2950586">
-					<simpleblockfile filename="e00004ac.au" len="262144" min="-0.945746" max="0.82461" rms="0.266032"/>
+				<waveblock start="2877556">
+					<simpleblockfile filename="e0000be4.au" len="189114" min="-0.945746" max="0.890129" rms="0.258211"/>
 				</waveblock>
-				<waveblock start="3212730">
-					<simpleblockfile filename="e0000d7f.au" len="262144" min="-0.861734" max="0.913612" rms="0.248848"/>
+			</sequence>
+			<envelope numpoints="1">
+				<controlpoint t="69.538979591837" val="1.000000000000"/>
+			</envelope>
+		</waveclip>
+		<waveclip offset="69.53900227">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1812936">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000dc9.au" len="163830" min="-0.844493" max="0.870709" rms="0.22922"/>
 				</waveblock>
-				<waveblock start="3474874">
-					<simpleblockfile filename="e0000ca3.au" len="262144" min="-0.863286" max="0.866221" rms="0.248839"/>
+				<waveblock start="163830">
+					<simpleblockfile filename="e00006a2.au" len="163831" min="-0.848326" max="0.868411" rms="0.229134"/>
 				</waveblock>
-				<waveblock start="3737018">
-					<simpleblockfile filename="e0000daa.au" len="262144" min="-0.848326" max="0.870709" rms="0.25413"/>
-				</waveblock>
-				<waveblock start="3999162">
+				<waveblock start="327661">
 					<simpleblockfile filename="e0000551.au" len="262144" min="-0.85416" max="0.85711" rms="0.259507"/>
 				</waveblock>
-				<waveblock start="4261306">
+				<waveblock start="589805">
 					<simpleblockfile filename="e0000775.au" len="262144" min="-0.811435" max="0.834502" rms="0.274738"/>
 				</waveblock>
-				<waveblock start="4523450">
+				<waveblock start="851949">
 					<simpleblockfile filename="e0000f20.au" len="262144" min="-0.845169" max="0.830772" rms="0.25715"/>
 				</waveblock>
-				<waveblock start="4785594">
+				<waveblock start="1114093">
 					<simpleblockfile filename="e00003d5.au" len="262144" min="-0.831437" max="0.852757" rms="0.284239"/>
 				</waveblock>
-				<waveblock start="5047738">
+				<waveblock start="1376237">
 					<simpleblockfile filename="e0000bc8.au" len="262144" min="-0.823245" max="0.866381" rms="0.291423"/>
 				</waveblock>
-				<waveblock start="5309882">
+				<waveblock start="1638381">
 					<simpleblockfile filename="e00005d7.au" len="174555" min="-0.847816" max="0.86803" rms="0.282646"/>
 				</waveblock>
 			</sequence>
-			<envelope numpoints="0"/>
+			<envelope numpoints="1">
+				<controlpoint t="0.000000000000" val="1.013888835907"/>
+			</envelope>
 		</waveclip>
 	</wavetrack>
-	<labeltrack name="Textspur" numlabels="9" height="110" minimized="0" isSelected="1">
+	<labeltrack name="Textspur" numlabels="10" height="110" minimized="0" isSelected="0">
 		<label t="14.89600000" t1="14.89600000" title="Eintreffen Roboter, Schwenk richtung Erde"/>
 		<label t="28.62200000" t1="28.62200000" title="Google Earth"/>
 		<label t="42.11100000" t1="42.11100000" title="Szene 1: auf Haus D"/>
@@ -156,14 +175,15 @@
 		<label t="69.53900000" t1="69.53900000" title="Szene 3"/>
 		<label t="83.25400000" t1="83.25400000" title="Szene 4"/>
 		<label t="96.96800000" t1="96.96800000" title="Szene 5"/>
-		<label t="110.68200000" t1="110.68200000" title="110,6824"/>
+		<label t="110.68200000" t1="110.68200000" title="Szene 8"/>
 		<label t="119.66646254" t1="119.66646254" title="Ende der Szene, Zerstörung Informatikum"/>
+		<label t="124.36400000" t1="124.36400000" title="Scene 9"/>
 	</labeltrack>
 	<wavetrack name="RPG_Plus_Shrapnel-Mike_Koenig-802194222" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
-		<waveclip offset="122.57424036">
+		<waveclip offset="108.93002267">
 			<sequence maxsamples="262144" sampleformat="262159" numsamples="319104">
 				<waveblock start="0">
-					<simpleblockfile filename="e0000c27.au" len="262144" min="-1.012766" max="1.030198" rms="0.150252"/>
+					<simpleblockfile filename="e0000eca.au" len="262144" min="-1.012766" max="1.030198" rms="0.132731"/>
 				</waveblock>
 				<waveblock start="262144">
 					<simpleblockfile filename="e00002c6.au" len="56960" min="-0.092204" max="0.091377" rms="0.006706"/>
@@ -173,10 +193,10 @@
 		</waveclip>
 	</wavetrack>
 	<wavetrack name="RPG_Plus_Shrapnel-Mike_Koenig-802194222" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
-		<waveclip offset="122.57424036">
+		<waveclip offset="108.93002267">
 			<sequence maxsamples="262144" sampleformat="262159" numsamples="319104">
 				<waveblock start="0">
-					<simpleblockfile filename="e0000adb.au" len="262144" min="-1.029228" max="1.039904" rms="0.159852"/>
+					<simpleblockfile filename="e0000973.au" len="262144" min="-1.029228" max="1.039904" rms="0.143762"/>
 				</waveblock>
 				<waveblock start="262144">
 					<simpleblockfile filename="e0000a28.au" len="56960" min="-0.076495" max="0.091831" rms="0.006466"/>

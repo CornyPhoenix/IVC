@@ -7,11 +7,11 @@ scene01:
 scene03:
 	$(POVRAY) Campus.ini +SF1    +EF336     2>Logs/scene03 &
 scene04:
-	$(POVRAY) Campus.ini +SF336  +EF672     2>Logs/scene04 &
+	$(POVRAY) Campus.ini +SF337  +EF672     2>Logs/scene04 &
 scene05:
 	$(POVRAY) Campus.ini +SF673  +EF1008    2>Logs/scene05 &
 scene06:
-	$(POVRAY) Campus.ini +SF1009 +EF1339    2>Logs/scene06 &
+	$(POVRAY) Campus.ini +SF1009 +EF1344    2>Logs/scene06 &
 scene07:
 	$(POVRAY) Campus.ini +SF1345 +EF1680    2>Logs/scene07 &
 scene08:

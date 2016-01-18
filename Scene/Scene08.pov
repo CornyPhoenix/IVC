@@ -1,15 +1,9 @@
-#local local_clock = global_clock - 4;
+#local local_clock = global_clock - 5;
 
 #include "Informatikum/Informatikum4.pov"
 
-#declare CAM_START = <
-    (Bruecke_x1 + Bruecke_x2) / 2,
-    (Bruecke_y1 + Bruecke_y2) / 2, // Augenhöhe
-    (Bruecke_z1 + Bruecke_z2) / 2
->;
-
-#declare CAM_MOVE = <-D1_width*2/3, 0, 0>;
-#declare CAM_ANGLE_X = 3 * sin(64 * pi * local_clock);
+#declare CAM_MOVE = <-D1_width/2, 0, 0>;
+#declare CAM_ANGLE_X = 10 * sin(32 * pi * local_clock);
 #if (local_clock < 0.25 | local_clock > 0.75)
     #declare CAM_ANGLE_Y = 0;
 #else

@@ -1,25 +1,25 @@
 % !TeX root=../doc.tex
 \subsection{Filmszenen}
 
-\begin{itemize}
-	\item Herausforderung: Anpassung der Szenenübergänge an die Musik
-	\item 140 bpm
-	\item 32 beats -> 8 Takte
-	\item $\frac{60 seconds}{140 beats} \cdot 32 beats = 13,71 seconds$
-	\item $13,71 s \cdot 24.5 frames/sec = 336 frames$ -> Dezimal-Framerate für eine gerade Anzahl von Frames
-\end{itemize}
+Eine besondere Herausforderung stellte die Angleichung der Übergänge zwischen den Szenen an den Soundtrack dar, dessen Tempo 140 BPM beträgt. Wir haben uns dazu entschlossen eine Szene 32 Beats (beziehungsweise 8 Takte) lang zu machen. Das entspricht einer Dauer von 13,71 Sekunden für eine Szene ($\frac{60 \text{ sec}}{140 \text{ beats}} \cdot 32 \text{ beats} = 13,71 \text{ sec}$). Um die Anzahl der Frames zu bestimmen, muss diese Dauer mit der Frame-Rate multipliziert werden. Als Frame-Rate haben wir uns 24,5 ausgesucht, um eine gerade Anzahl von Frames pro Szene zu haben ($13,71 \text{ sec} \cdot 24.5\text{ } \frac{\text{frames}}{\text{sec}} = 336 \text{ frames}$).
 
-\begin{tabular}{p{1cm}rrp{9cm}}
-	\textbf{Szene} & \textbf{Zeit} & \textbf{Frame} & \textbf{Beschreibung} \\
-	\hline
-	1 & 0,000 & & Weltallszene\\
-	2 & 28,622 & & Zoom an Informatikum\\
-	3 & 42,111 & 0 & Minimon auf Haus D\\
-	4 & 55,825 & 336 & Flug über Campus, Sprung von Haus D\\
-	5 & 69,539 & 672 & \\
-	6 & 83,254 & 1008 & \\
-	7 & 96,968 & 1344 & Verfolgung in Haus D, Schwenk\\
-	8 & 110,682 & 1680 & \\
-	9 & 123,804 & 2001 & Explosion Informatikum\\
-	A & 129,810 & 2352 & Abspann\\
-\end{tabular}
+Unter Berücksichtigung der Länge, die aus der Nachbearbeitung des Soundtracks resultiert ist, haven wir insgesamt wir 8,5 Szenen. Eine genaue Übersicht über die Szenen, mit der Startdauer und der ersten Frame, ist in der unteren Tabelle gegeben:
+
+\begin{figure}
+	\begin{tabular}{p{1cm}rrp{9cm}}
+		\textbf{Szene} & \textbf{Zeit} & \textbf{Frame} & \textbf{Beschreibung} \\
+		\hline
+		1 & 0,000 & & Weltallszene\\
+		2 & 28,622 & & Zoom an Informatikum\\
+		3 & 42,111 & 0 & Minimon auf Haus D\\
+		4 & 55,825 & 336 & Flug über Campus, Sprung von Haus D\\
+		5 & 69,539 & 672 & \\
+		6 & 83,254 & 1008 & \\
+		7 & 96,968 & 1344 & Verfolgung in Haus D, Schwenk\\
+		8 & 110,682 & 1680 & \\
+		9 & 123,804 & 2001 & Explosion Informatikum\\
+		A & 129,810 & 2352 & Abspann\\
+	\end{tabular}
+	\caption{TODO}
+	\label{fig:scenes}
+\end{figure}

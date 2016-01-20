@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.12.18)  20 JAN 2016 13:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.12.18)  20 JAN 2016 15:02
 entering extended mode
 **doc.tex
 (doc.tex
@@ -808,59 +808,79 @@ Package: apacite 2013/07/21 v6.03 APA citation
 \bibparsep=\skip56
 \bibitemsep=\skip57
 \biblabelsep=\skip58
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\cleveref\cleveref.sty"
+Package: cleveref 2013/12/28 v0.19 Intelligent cross-referencing
+Package cleveref Info: `hyperref' support loaded on input line 2230.
+LaTeX Info: Redefining \cref on input line 2230.
+LaTeX Info: Redefining \Cref on input line 2230.
+LaTeX Info: Redefining \crefrange on input line 2230.
+LaTeX Info: Redefining \Crefrange on input line 2230.
+LaTeX Info: Redefining \cpageref on input line 2230.
+LaTeX Info: Redefining \Cpageref on input line 2230.
+LaTeX Info: Redefining \cpagerefrange on input line 2230.
+LaTeX Info: Redefining \Cpagerefrange on input line 2230.
+LaTeX Info: Redefining \labelcref on input line 2230.
+LaTeX Info: Redefining \labelcpageref on input line 2230.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks28
+\verbatim@line=\toks29
+\verbatim@in@stream=\read1
 ) (doc.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 38.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 40.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 40.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\fmlfutm.fd"
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 38.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 40.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 40.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\fmsfutm.fd"
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 38.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 40.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 40.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\fmxfutm.fd"
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 38.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 40.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 38.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 40.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\t1futs.fd"
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 )
 \AtBeginShipoutBox=\box34
-Package hyperref Info: Link coloring OFF on input line 38.
+Package hyperref Info: Link coloring OFF on input line 40.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -870,9 +890,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count119
 )
-LaTeX Info: Redefining \ref on input line 38.
-LaTeX Info: Redefining \pageref on input line 38.
-LaTeX Info: Redefining \nameref on input line 38.
+LaTeX Info: Redefining \ref on input line 40.
+LaTeX Info: Redefining \pageref on input line 40.
+LaTeX Info: Redefining \nameref on input line 40.
 
 (doc.out) (doc.out)
 \@outlinefile=\write3
@@ -883,12 +903,12 @@ LaTeX Info: Redefining \nameref on input line 38.
 \scratchbox=\box35
 \nofMPsegments=\count121
 \nofMParguments=\count122
-\everyMPshowfont=\toks28
+\everyMPshowfont=\toks30
 \MPscratchCnt=\count123
 \MPscratchDim=\dimen128
 \MPnumerator=\count124
 \makeMPintoPDFobject=\count125
-\everyMPtoPDFconversion=\toks29
+\everyMPtoPDFconversion=\toks31
 )
 \c@maskedRefs=\count126
  ("C:\Program Files\MiKTeX 2.9\tex\latex\apacite\ngerman.apc"
@@ -900,25 +920,25 @@ LaTeX Info: Redefining \BPBI on input line 142.
 LaTeX Info: Redefining \BHBI on input line 143.
 ))
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 41.
-LaTeX Font Info:    Try loading font information for FML+futmi on input line 41
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 43.
+LaTeX Font Info:    Try loading font information for FML+futmi on input line 43
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\fmlfutmi.fd"
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 41.
+(Font)              scaled to size 13.24796pt on input line 43.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 41.
+(Font)              scaled to size 9.19998pt on input line 43.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 41.
+(Font)              scaled to size 7.35999pt on input line 43.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 41.
+(Font)              scaled to size 13.24796pt on input line 43.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 41.
+(Font)              scaled to size 9.19998pt on input line 43.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 41.
+(Font)              scaled to size 7.35999pt on input line 43.
 
 (Documentation/Einleitung.tex
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <17.28> not available
@@ -945,28 +965,42 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 3.
 )
 LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <17.28> not available
-(Font)              Font shape `T1/futs/b/it' tried instead on input line 44.
+(Font)              Font shape `T1/futs/b/it' tried instead on input line 46.
  (Documentation/Figuren.tex
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 1.
-)
-(Informatikum/Informatikum.tex
+
+<Documentation/Images/Pacman.jpg, id=57, 1425.325pt x 1482.53876pt>
+File: Documentation/Images/Pacman.jpg Graphic file (type jpg)
+
+<use Documentation/Images/Pacman.jpg>
+Package pdftex.def Info: Documentation/Images/Pacman.jpg used on input line 8.
+(pdftex.def)             Requested size: 122.30174pt x 127.20177pt.
+
+<Documentation/Images/Rayman.jpg, id=58, 1204.5pt x 1248.665pt>
+File: Documentation/Images/Rayman.jpg Graphic file (type jpg)
+
+<use Documentation/Images/Rayman.jpg>
+Package pdftex.def Info: Documentation/Images/Rayman.jpg used on input line 13.
+
+(pdftex.def)             Requested size: 122.30174pt x 126.77911pt.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./Documentation/Images/Pa
+cman.jpg> <./Documentation/Images/Rayman.jpg>]) (Informatikum/Informatikum.tex
 LaTeX Font Info:    Try loading font information for TS1+futs on input line 4.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\fourier\ts1futs.fd"
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
 )
-<Informatikum/Informatikum1.pdf, id=57, 1806.75pt x 1806.75pt>
+<Informatikum/Informatikum1.pdf, id=72, 1806.75pt x 1806.75pt>
 File: Informatikum/Informatikum1.pdf Graphic file (type pdf)
 
 <use Informatikum/Informatikum1.pdf>
 Package pdftex.def Info: Informatikum/Informatikum1.pdf used on input line 8.
 (pdftex.def)             Requested size: 249.13371pt x 249.11122pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<Informatikum/Informatikum2.pdf, id=59, 1806.75pt x 1806.75pt>
+<Informatikum/Informatikum2.pdf, id=74, 1806.75pt x 1806.75pt>
 File: Informatikum/Informatikum2.pdf Graphic file (type pdf)
 
 <use Informatikum/Informatikum2.pdf>
@@ -979,55 +1013,53 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 22.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [1
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (Documentation/Film.tex
+) (Documentation/Film.tex [2 <./Informatikum/Informatikum1.pdf>]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 13.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 10.
 
-Overfull \hbox (1.48723pt too wide) in paragraph at lines 13--13
+Overfull \hbox (1.48723pt too wide) in paragraph at lines 10--10
 []\T1/futs/b/n/12 Szene| 
  []
 
-) (Documentation/Werkzeuge.tex [2 <./Informatikum/Informatikum1.pdf>]
+) (Documentation/Werkzeuge.tex
 LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <14.4> not available
 (Font)              Font shape `T1/futs/b/it' tried instead on input line 4.
- [3 <./Informatikum/Informatikum2.pdf>]) (Documentation/Zusammenfassung.tex) [4
-]
+ [3 <./Informatikum/Informatikum2.pdf>])
+(Documentation/Zusammenfassung.tex) [4]
 No file Weitere Medien.tex.
 [5
 
 ]
-Overfull \hbox (8.6899pt too wide) in paragraph at lines 55--56
+Overfull \hbox (8.6899pt too wide) in paragraph at lines 57--58
 \T1/futs/m/n/12 ki, ge-schnit-ten []$\T1/cmtt/m/n/12 https :// soundcloud [] .c
 om / robotaki / scott [] -pilgrim [] -vs [] -the [] -world []$
  []
 
 (doc.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 61.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 63.
  [6
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 61.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 63.
  (doc.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 61.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 61.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 63.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 63.
 Package rerunfilecheck Info: File `doc.out' has not changed.
 (rerunfilecheck)             Checksum: F4C2D44302F56A92936A9F516AFD494A;753.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 61.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 63.
  ) 
 Here is how much of TeX's memory you used:
- 8442 strings out of 493698
- 117425 string characters out of 3144411
- 214421 words of memory out of 3000000
- 11539 multiletter control sequences out of 15000+200000
- 108479 words of font info for 111 fonts, out of 3000000 for 9000
+ 9897 strings out of 493698
+ 150350 string characters out of 3144411
+ 279030 words of memory out of 3000000
+ 12985 multiletter control sequences out of 15000+200000
+ 107520 words of font info for 108 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 30i,8n,35p,682b,376s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,10n,35p,741b,376s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}{C:/Pro
 gram Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/fourier/fourier-ms.pfb><C:/Program Files/MiKTeX 2.9/font
@@ -1035,9 +1067,9 @@ s/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/adobe/
 utopia/putbi8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/adobe/utopia/putr8a
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/adobe/utopia/putri8a.pfb><C:/Prog
 ram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on doc.pdf (6 pages, 2283927 bytes).
+Output written on doc.pdf (6 pages, 3929163 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 28 named destinations out of 1000 (max. 500000)
- 115 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 30 named destinations out of 1000 (max. 500000)
+ 125 words of extra memory for PDF output out of 10000 (max. 10000000)
 

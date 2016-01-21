@@ -1,3 +1,3 @@
-img/arth.jpg -> https://upload.wikimedia.org/wikipedia/commons/6/6b/Land_ocean_ice_cloud_hires.jpg
+img/earth.jpg -> https://upload.wikimedia.org/wikipedia/commons/6/6b/Land_ocean_ice_cloud_hires.jpg
 img/stars.png -> http://paulbourke.net/miscellaneous/starfield/8192x4096.png
 img/sky.jpg -> http://www.bzfusion.net/skymaps/skymap_photo9.jpg

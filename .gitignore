@@ -9,6 +9,7 @@
 *.bbl
 *.blg
 *.synctex.gz
+*.mov
 doc.pdf
 IVChandouts.pdf
 IVCslidesInc.pdf

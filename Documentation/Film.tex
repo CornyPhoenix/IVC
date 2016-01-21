@@ -1,25 +1,31 @@
 % !TeX root=../doc.tex
 \subsection{Filmszenen}
 
-Eine besondere Herausforderung stellte die Angleichung der Übergänge zwischen den Szenen an den Soundtrack dar, dessen Tempo 140 BPM beträgt. Wir haben uns dazu entschlossen eine Szene 32 Beats (beziehungsweise 8 Takte) lang zu machen. Das entspricht einer Dauer von 13,71 Sekunden für eine Szene ($\frac{60 \text{ sec}}{140 \text{ beats}} \cdot 32 \text{ beats} = 13,71 \text{ sec}$). Um die Anzahl der Frames zu bestimmen, muss diese Dauer mit der Frame-Rate multipliziert werden. Als Frame-Rate haben wir uns 24,5 ausgesucht, um eine gerade Anzahl von Frames pro Szene zu haben ($13,71 \text{ sec} \cdot 24.5\text{ } \frac{\text{frames}}{\text{sec}} = 336 \text{ frames}$).
+Eine besondere Herausforderung stellte die Angleichung der Übergänge zwischen den Szenen an den Soundtrack dar, dessen Tempo 140 BPM beträgt. Wir haben uns dazu entschlossen eine Szene 32 Schläge (beziehungsweise 8 Viervierteltakte) lang zu machen. Das entspricht einer Dauer von 13,71 Sekunden für eine Szene, wie sich aus folgender Formel errechnet.
 
-Unter Berücksichtigung der Länge, die aus der Nachbearbeitung des Soundtracks resultiert ist, haven wir insgesamt wir 8,5 Szenen. Eine genaue Übersicht über die Szenen, mit der Startdauer und der ersten Frame, ist in der unteren Tabelle gegeben:
+\begin{align*}
+	\frac{60 \text{ s/min}}{140 \text{ Schläge/min}} \cdot 32 \text{ Schläge} = 13,71 \text{ s}
+\end{align*}
 
-\begin{figure}
+Um die Anzahl der Bilder zu bestimmen, muss diese Dauer mit der Bildrate multipliziert werden. Als Bildrate haben wir 24,5 ausgesucht, um eine gerade Anzahl von Bilder pro Szene zu haben ($13,71 \text{ s} \cdot 24.5\text{ } \frac{\text{Bilder}}{\text{s}} = 336 \text{ Bilder}$).
+
+Unter Berücksichtigung der Länge, die aus der Nachbearbeitung des Soundtracks resultiert ist, haben wir insgesamt 8,5 Szenen. Eine genaue Übersicht über die Szenen sowie deren Startdauer und der Nummer des ersten Bildes, ist in der folgenden Tabelle gegeben.
+
+\begin{figure}[h]
 	\begin{tabular}{p{1cm}rrp{9cm}}
-		\textbf{Szene} & \textbf{Zeit} & \textbf{Frame} & \textbf{Beschreibung} \\
+		\textbf{Szene} & \textbf{Zeit} & \textbf{Bildnr.} & \textbf{Beschreibung} \\
 		\hline
-		1 & 0,000 & & Weltallszene\\
+		1 & 0,000 & & Weltallszene: Minimons fliegen auf die Erde zu\\
 		2 & 28,622 & & Zoom an Informatikum\\
 		3 & 42,111 & 0 & Minimon auf Haus D\\
 		4 & 55,825 & 336 & Flug über Campus, Sprung von Haus D\\
-		5 & 69,539 & 672 & \\
-		6 & 83,254 & 1008 & \\
+		5 & 69,539 & 672 & Minimon landet und Armee tanzt\\
+		6 & 83,254 & 1008 & Armee marschiert\\
 		7 & 96,968 & 1344 & Verfolgung in Haus D, Schwenk\\
-		8 & 110,682 & 1680 & \\
-		9 & 123,804 & 2001 & Explosion Informatikum\\
-		A & 129,810 & 2352 & Abspann\\
+		8 & 110,682 & 1680 & Kamerafahrten über Häuser\\
+		9 & 123,804 & 2001 & Explosion des Informatikums\\
+		10 & 129,810 & 2352 & Abspann\\
 	\end{tabular}
-	\caption{TODO}
+	\caption{Szenen des Films.}
 	\label{fig:scenes}
 \end{figure}
